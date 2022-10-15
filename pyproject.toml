@@ -1,0 +1,14 @@
+[tool.poetry]
+name = "intensive_django"
+version = "0.1.0"
+description = ""
+authors = ["h4x4d <sidenkoleg@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
