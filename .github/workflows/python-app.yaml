@@ -2,9 +2,9 @@ name: Python application
 
 on:
   push:
-    branches: [ "main", "develop" ]
+    branches: [ "main", "develop", "test_lint_branch" ]
   pull_request:
-    branches: [ "main", "develop" ]
+    branches: [ "main", "develop", "test_lint_branch" ]
 
 permissions:
   contents: read
