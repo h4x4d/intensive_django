@@ -12,6 +12,20 @@ git clone https://github.com/h4x4d/intensive_django.git
 cd intensive_django
 ```
 
+### 0.4 If you want to use venv
+```
+pip install virtualenv
+virtualenv env
+```
+Windows:
+```
+.\venv\Scripts\activate
+```
+Linux:
+```
+source venv/bin/activate
+```
+
 ## 1. Fast run project (Install all dependencies and run):
 ```
 make use
