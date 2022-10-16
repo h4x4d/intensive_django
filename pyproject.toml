@@ -8,7 +8,12 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.10"
 django = "^4.1.2"
+python-dotenv = "^0.21.0"
 
+
+[tool.poetry.group.dev.dependencies]
+flake8 = "^5.0.4"
+dlint = "^0.13.0"
 
 [build-system]
 requires = ["poetry-core"]
