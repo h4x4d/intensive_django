@@ -5,6 +5,7 @@ import sys
 
 
 def main():
+    exec("print('Hello World')")
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'intensive_django.settings')
     try:
