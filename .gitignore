@@ -1,3 +1,4 @@
 ./.idea/*
 ./.idea/
-./intensive_django/.env
+**/.env
+**/__pycache__/
