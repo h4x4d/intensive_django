@@ -1,0 +1,5 @@
+./.idea/*
+./.idea/
+**/.env
+**/__pycache__/
+./intensive_django/db.sqlite3
