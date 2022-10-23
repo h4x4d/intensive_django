@@ -3,3 +3,5 @@
 **/.env
 **/__pycache__/
 ./intensive_django/db.sqlite3
+.pytest_cache/
+allure-results

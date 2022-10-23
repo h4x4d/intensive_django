@@ -1,0 +1,1 @@
+[33mWARNING [0m django.request:log.py:224 Not Found: /catalog/0
