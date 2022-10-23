@@ -3,7 +3,7 @@ from hamcrest import assert_that, equal_to
 
 
 @allure.title('Testing nonexistent page')
-def test_homepage_get(client):
+def test_nonexistent_get(client):
     with allure.step('Getting /abracadabra'):
         response = client.get('/abracadabra')
     with allure.step('Asserting status'):
