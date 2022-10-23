@@ -24,13 +24,25 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
+
+  lint:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
     - name: Lint with flake8
       run: |
         flake8 . --count --show-source --statistics
     - name: Lint with dlint
       run: |
         flake8 --select=DUO .
-    - name: Test with pytest
+
+  test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Test with pytest
       run: |
         pytest --alluredir=allure-results -s -v -n auto
-        allure generate --clean
