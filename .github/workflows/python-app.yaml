@@ -25,7 +25,6 @@ jobs:
         python -m pip install --upgrade pip
         if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
 
-    - uses: actions/checkout@v3
     - name: Lint with flake8
       run: |
         flake8 . --count --show-source --statistics
@@ -34,7 +33,6 @@ jobs:
       run: |
         flake8 --select=DUO .
 
-    - uses: actions/checkout@v3
     - name: Test with pytest
       run: |
         pytest --alluredir=allure-results -s -v -n auto
