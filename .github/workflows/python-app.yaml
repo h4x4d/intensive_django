@@ -30,3 +30,7 @@ jobs:
     - name: Lint with dlint
       run: |
         flake8 --select=DUO .
+    - name: Test with pytest
+      run: |
+        pytest --alluredir=allure-results -s -v -n auto
+        allure generate --clean
