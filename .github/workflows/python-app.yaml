@@ -33,7 +33,7 @@ jobs:
       run: |
         flake8 --select=DUO .
 
-    - name: Test with pytest
+    - name: Test with unittest
       run: |
         cd intensive_django
         python manage.py test
