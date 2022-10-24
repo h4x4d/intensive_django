@@ -1,11 +1,9 @@
-import allure
-from hamcrest import assert_that, equal_to
+from django.test import TestCase, Client
 
 
-@allure.title('Testing about page')
-def test_about_get(client):
-    with allure.step('Getting about page'):
-        response = client.get('/about/')
-    with allure.step('Asserting status'):
-        assert_that(response.status_code, equal_to(200),
-                    f'Expected code was 200, but got {response.status_code}')
+class AboutURLTests(TestCase):
+    def test_about(self):
+        response = Client().get("/about/")
+        self.assertEqual(response.status_code, 200,
+                         f"Unexpected status code: {response.status_code}."
+                         f" Expected: {200}")

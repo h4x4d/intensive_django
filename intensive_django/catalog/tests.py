@@ -1,25 +1,39 @@
-import allure
-import pytest
-from hamcrest import assert_that, equal_to
+from django.test import TestCase, Client
 
 
-@allure.title('Testing catalog page')
-def test_catalog_get(client):
-    with allure.step('Getting catalog page'):
-        response = client.get('/catalog/')
-    with allure.step('Asserting status'):
-        assert_that(response.status_code, equal_to(200),
-                    f'Expected code was 200, but got {response.status_code}')
+class CatalogURLTests(TestCase):
+    def test_catalog_default(self):
+        response = Client().get("/catalog/")
+        self.assertEqual(response.status_code, 200,
+                         f"Unexpected status code: {response.status_code}."
+                         f" Expected: {200}")
 
+    def test_catalog_good(self):
+        response = Client().get("/catalog/123")
+        self.assertEqual(response.status_code, 200,
+                         f"Unexpected status code: {response.status_code}."
+                         f" Expected: {200}")
 
-@pytest.mark.parametrize("page_to_go,expected_status_code",
-                         [("1", 200), ("1598", 200), ("a", 404),
-                          ("0", 404), ("-11", 404), ])
-@allure.title('Testing catalog direct pages')
-def test_catalog_direct_get(client, page_to_go, expected_status_code):
-    with allure.step('Getting catalog page'):
-        response = client.get(f'/catalog/{page_to_go}')
-    with allure.step('Asserting status'):
-        assert_that(response.status_code, equal_to(expected_status_code),
-                    f'Expected code was {expected_status_code}, '
-                    f'but got {response.status_code}')
+    def test_catalog_bad_string(self):
+        response = Client().get("/catalog/asd")
+        self.assertEqual(response.status_code, 404,
+                         f"Unexpected status code: {response.status_code}."
+                         f" Expected: {404}")
+
+    def test_catalog_bad_zero(self):
+        response = Client().get("/catalog/0")
+        self.assertEqual(response.status_code, 404,
+                         f"Unexpected status code: {response.status_code}."
+                         f" Expected: {404}")
+
+    def test_catalog_bad_decimal(self):
+        response = Client().get("/catalog/1.5")
+        self.assertEqual(response.status_code, 404,
+                         f"Unexpected status code: {response.status_code}."
+                         f" Expected: {404}")
+
+    def test_catalog_bad_less_than_zero(self):
+        response = Client().get("/catalog/-11")
+        self.assertEqual(response.status_code, 404,
+                         f"Unexpected status code: {response.status_code}."
+                         f" Expected: {404}")

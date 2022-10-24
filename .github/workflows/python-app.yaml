@@ -35,4 +35,5 @@ jobs:
 
     - name: Test with pytest
       run: |
-        pytest --alluredir=allure-results -s -v -n auto
+        cd intensive_django
+        python manage.py test
