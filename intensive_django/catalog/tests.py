@@ -8,32 +8,15 @@ class CatalogURLTests(TestCase):
                          f"Unexpected status code: {response.status_code}."
                          f" Expected: {200}")
 
-    def test_catalog_good(self):
-        response = Client().get("/catalog/123")
-        self.assertEqual(response.status_code, 200,
-                         f"Unexpected status code: {response.status_code}."
-                         f" Expected: {200}")
+    def test_catalog_items(self):
+        tests = (("123", 200), ("asd", 404), ("0", 404),
+                 ("1.123", 404), ("-123", 404))
 
-    def test_catalog_bad_string(self):
-        response = Client().get("/catalog/asd")
-        self.assertEqual(response.status_code, 404,
-                         f"Unexpected status code: {response.status_code}."
-                         f" Expected: {404}")
-
-    def test_catalog_bad_zero(self):
-        response = Client().get("/catalog/0")
-        self.assertEqual(response.status_code, 404,
-                         f"Unexpected status code: {response.status_code}."
-                         f" Expected: {404}")
-
-    def test_catalog_bad_decimal(self):
-        response = Client().get("/catalog/1.5")
-        self.assertEqual(response.status_code, 404,
-                         f"Unexpected status code: {response.status_code}."
-                         f" Expected: {404}")
-
-    def test_catalog_bad_less_than_zero(self):
-        response = Client().get("/catalog/-11")
-        self.assertEqual(response.status_code, 404,
-                         f"Unexpected status code: {response.status_code}."
-                         f" Expected: {404}")
+        for i in tests:
+            pk, status_code = i
+            with self.subTest(pk=pk, status_code=status_code):
+                response = Client().get(f"/catalog/{pk}/")
+                self.assertEqual(response.status_code, status_code,
+                                 f"Unexpected status code: "
+                                 f"{response.status_code}."
+                                 f" Expected: {status_code}")
