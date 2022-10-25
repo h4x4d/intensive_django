@@ -24,9 +24,16 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
+
     - name: Lint with flake8
       run: |
         flake8 . --count --show-source --statistics
+
     - name: Lint with dlint
       run: |
         flake8 --select=DUO .
+
+    - name: Test with unittest
+      run: |
+        cd intensive_django
+        python manage.py test

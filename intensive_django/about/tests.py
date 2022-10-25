@@ -1,3 +1,9 @@
-# from django.test import TestCase
+from django.test import TestCase, Client
 
-# Create your tests here.
+
+class AboutURLTests(TestCase):
+    def test_about(self):
+        response = Client().get("/about/")
+        self.assertEqual(response.status_code, 200,
+                         f"Unexpected status code: {response.status_code}."
+                         f" Expected: {200}")

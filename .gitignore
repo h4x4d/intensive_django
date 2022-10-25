@@ -1,5 +1,7 @@
-./.idea/*
-./.idea/
-**/.env
-**/__pycache__/
-./intensive_django/db.sqlite3
+.idea/*
+.idea
+.env
+__pycache__/
+db.sqlite3
+.pytest_cache/
+allure-results
