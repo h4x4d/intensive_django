@@ -17,13 +17,17 @@ cd intensive_django
 
 ### 0.4 If you want to use venv
 ```
-pip install virtualenv
-virtualenv env
+python -m venv venv
 ```
 Windows:
 ```
 .\venv\Scripts\activate
 ```
+Windows with bash:
+```
+. venv/Scripts/activate
+```
+
 Linux:
 ```
 source venv/bin/activate
