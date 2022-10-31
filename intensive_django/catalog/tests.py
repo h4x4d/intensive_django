@@ -24,6 +24,7 @@ class CatalogURLTests(TestCase):
                                  f"{response.status_code}."
                                  f" Expected: {status_code}")
 
+                
 class ModelsTest(TestCase):
     @classmethod
     def setUpClass(cls):
