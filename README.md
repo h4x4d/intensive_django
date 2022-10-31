@@ -1,3 +1,6 @@
+# Info:
+### [ER Diagram](https://app.quickdatabasediagrams.com/#/d/dOSDcw)
+
 ## 0. Prerequisites
 ### 0.1 Installing python:
 
