@@ -60,7 +60,7 @@ class ModelsTest(TestCase):
 
         self.item = Item(name='Test_item',
                          category=self.category,
-                         text="Random text, but with 'Роскошно'",
+                         text="Random text, but with Роскошно",
                          )
 
         self.item.full_clean()
