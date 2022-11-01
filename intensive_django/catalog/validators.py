@@ -1,3 +1,4 @@
+import re
 from functools import wraps
 
 from django.forms import ValidationError
@@ -5,7 +6,7 @@ from django.forms import ValidationError
 
 def validate_brilliant(value):
     need_words = {"превосходно", "роскошно"}
-    check_value = value.lower()
+    check_value = re.sub(r'[^\w\s]', ' ', value.lower())
 
     if len(need_words & set(check_value.split())) == 0:
         raise ValidationError(
