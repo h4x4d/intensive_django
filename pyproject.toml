@@ -9,6 +9,10 @@ readme = "README.md"
 python = "^3.10"
 python-dotenv = "^0.21.0"
 django = ">=3.2.0,<3.3.0"
+django-markdownfield = "^0.10.0"
+sorl-thumbnail = "^12.9.0"
+django-cleanup = "^6.0.0"
+pillow = "^9.3.0"
 
 [tool.poetry.group.dev]
 optional = true
