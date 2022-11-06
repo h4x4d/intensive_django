@@ -31,7 +31,8 @@ admin.site.register(Category)
 
 @admin.register(MainImage)
 class AdminMainImage(admin.ModelAdmin):
-    list_display = ('img_name', 'img_thumb',)
+    list_display = ('item', 'img_thumb',)
+    ordering = ('item',)
 
     def get_img(self, obj):
         return get_thumbnail(obj.image, "300x300", crop='center',
@@ -41,9 +42,6 @@ class AdminMainImage(admin.ModelAdmin):
         if obj.item:
             return mark_safe(f'<img src="{self.get_img(obj).url}">')
         return "Нет изображения"
-
-    def img_name(self, obj):
-        return obj.item.name
 
     img_thumb.short_description = 'Превью'
     img_thumb.allow_tags = True
@@ -51,7 +49,8 @@ class AdminMainImage(admin.ModelAdmin):
 
 @admin.register(GalleryImage)
 class AdminGalleryImage(admin.ModelAdmin):
-    list_display = ('img_name', 'img_thumb',)
+    list_display = ('item', 'img_thumb',)
+    ordering = ('item',)
 
     def get_img(self, obj):
         return get_thumbnail(obj.image, "300x300", crop='center',
@@ -61,9 +60,6 @@ class AdminGalleryImage(admin.ModelAdmin):
         if obj.item:
             return mark_safe(f'<img src="{self.get_img(obj).url}">')
         return "Нет изображения"
-
-    def img_name(self, obj):
-        return obj.item.name
 
     img_thumb.short_description = 'Превью'
     img_thumb.allow_tags = True
