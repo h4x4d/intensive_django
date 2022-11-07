@@ -8,26 +8,18 @@
                  alt="pass">
         </a>
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            {% with request.resolver_match.view_name as link %}
-
-                <li><a type="button" class="nav-link px-2 link-dark"
-                       href="{% url 'homepage:home' %}">
-                    {% if link == "homepage:home" %}<b>{% endif %}Главная
-                    {% if link == "homepage:home" %}</b>{% endif %}</a>
-                </li>
-                <li><a type="button" class="nav-link px-2 link-dark"
-                       href="{% url 'about:description' %}">
-                    {% if link == "about:description" %}<b>{% endif %}О нас
-                    {% if link == "about:description" %}</b>{% endif %}</a>
-                </li>
-                <li><a type="button" class="nav-link px-2 link-dark"
-                       href="{% url 'catalog:item_list' %}">
-                    {% if link == "catalog:item_list" or link == "catalog:item_detail" %}
-                        <b>{% endif %}Каталог
-                    {% if link == "catalog:item_list" or link == "catalog:item_detail" %}
-                        </b>{% endif %}</a>
-                </li>
-            {% endwith %}
+            <li>
+                <a class="nav-link {% ifequal request.path '/' %} fw-bold {% endifequal %} link-dark "
+                   href="{% url 'homepage:home' %}">Главная</a>
+            </li>
+            <li><a type="button"
+                   class="nav-link {% ifequal request.path '/about' %} fw-bold {% endifequal %} link-dark"
+                   href="{% url 'about:description' %}">О нас</a>
+            </li>
+            <li><a type="button"
+                   class="nav-link {% if '/catalog/' in request.path %} fw-bold {% endif %} link-dark"
+                   href="{% url 'catalog:item_list' %}">Каталог</a>
+            </li>
         </ul>
     </header>
 </div>
