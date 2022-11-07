@@ -10,4 +10,4 @@ venv/
 env/
 virtualvenv/
 
-generate_requirements.txt
+generate_requirements.py
