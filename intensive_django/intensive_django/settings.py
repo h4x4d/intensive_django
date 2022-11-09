@@ -1,6 +1,15 @@
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+from django_cleanup.signals import cleanup_pre_delete
+from sorl.thumbnail import delete
+
+
+def sorl_delete(**kwargs):
+    delete(kwargs['file'])
+
+
+cleanup_pre_delete.connect(sorl_delete)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,7 +34,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'about.apps.AboutConfig',
     'catalog.apps.CatalogConfig',
-    'homepage.apps.HomepageConfig'
+    'homepage.apps.HomepageConfig',
+    'markdownfield',
+    'sorl.thumbnail',
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [
@@ -43,7 +55,9 @@ ROOT_URLCONF = 'intensive_django.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -93,5 +107,10 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    BASE_DIR / "static-dev",
+]
+
+SITE_URL = "http://127.0.0.1:8000"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

@@ -9,3 +9,5 @@ db.sqlite3
 venv/
 env/
 virtualvenv/
+
+generate_requirements.py

@@ -1,0 +1,30 @@
+{% load static %}
+
+<div class="container">
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+        <p class="col-md-4 mb-0 text-muted">©
+            <script>document.write(new Date().getFullYear())</script>
+        </p>
+
+        <a href="/"
+           class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+            <img class="bi me-2" src="{% static 'favicon/favicon.ico' %}"
+                 alt="pass">
+        </a>
+
+        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+            <li>
+                <a class="nav-link {% ifequal request.path '/' %} fw-bold {% endifequal %} link-dark "
+                   href="{% url 'homepage:home' %}">Главная</a>
+            </li>
+            <li><a type="button"
+                   class="nav-link {% ifequal request.path '/about' %} fw-bold {% endifequal %} link-dark"
+                   href="{% url 'about:description' %}">О нас</a>
+            </li>
+            <li><a type="button"
+                   class="nav-link {% if '/catalog/' in request.path %} fw-bold {% endif %} link-dark"
+                   href="{% url 'catalog:item_list' %}">Каталог</a>
+            </li>
+        </ul>
+    </footer>
+</div>

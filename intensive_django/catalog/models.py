@@ -1,6 +1,10 @@
 from django.db import models
 
-from Core.models import PublishedBaseModel, NamedBaseModel, SlugBaseModel
+from Core.models import PublishedBaseModel, NamedBaseModel, SlugBaseModel, \
+    ImageBaseModel
+from markdownfield.models import MarkdownField, RenderedMarkdownField
+from markdownfield.validators import VALIDATOR_NULL
+
 from .validators import validate_must_be_param
 
 
@@ -28,9 +32,11 @@ class Item(PublishedBaseModel, NamedBaseModel):
     category = models.ForeignKey(Category, on_delete=models.CASCADE,
                                  related_name="items")
     tags = models.ManyToManyField(Tag, related_name="items")
-    text = models.TextField("Текст",
-                            validators=[validate_must_be_param('превосходно',
-                                                               'роскошно')])
+    text = MarkdownField(rendered_field='text_rendered',
+                         validator=VALIDATOR_NULL,
+                         validators=[validate_must_be_param("превосходно",
+                                                            "роскошно")])
+    text_rendered = RenderedMarkdownField(default="")
 
     class Meta:
         verbose_name = "Товар"
@@ -38,3 +44,26 @@ class Item(PublishedBaseModel, NamedBaseModel):
 
     def __str__(self):
         return self.name
+
+
+class MainImage(ImageBaseModel):
+    item = models.OneToOneField(Item, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = "Главное изображение"
+        verbose_name_plural = "Главные изображения"
+
+    def __str__(self):
+        return "Изображение " + self.item.name
+
+
+class GalleryImage(ImageBaseModel):
+    item = models.ForeignKey(Item, on_delete=models.CASCADE,
+                             related_name='images')
+
+    class Meta:
+        verbose_name = "Изображение"
+        verbose_name_plural = "Изображения"
+
+    def __str__(self):
+        return "Изображение '" + self.item.name + "'"

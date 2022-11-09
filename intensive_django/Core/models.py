@@ -22,3 +22,10 @@ class SlugBaseModel(models.Model):
 
     class Meta:
         abstract = True
+
+
+class ImageBaseModel(models.Model):
+    image = models.ImageField(upload_to='images')
+
+    class Meta:
+        abstract = True
