@@ -1,0 +1,12 @@
+<div class="col-4">
+    <a class="fw-bold fs-3" href="{% url 'catalog:item_detail' pk=item.id %}">{{ item.name }}</a>
+    <h4>Категория: {{ item.category.name }}</h4>
+    <h5>Теги:
+        {% for tag in item.tags.all %}
+            {{ tag.name }}{% if not forloop.last %},{% endif %}
+        {% endfor %}
+    </h5>
+    <h6>{{ item.text_rendered | safe | truncatewords:10 }}</h6>
+
+
+</div>

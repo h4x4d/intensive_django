@@ -38,6 +38,12 @@ INSTALLED_APPS = [
     'markdownfield',
     'sorl.thumbnail',
     'django_cleanup.apps.CleanupConfig',
+    'debug_toolbar',
+    'catalog.templatetags.index'
+]
+
+INTERNAL_IPS = [
+    '127.0.0.1',
 ]
 
 MIDDLEWARE = [
@@ -48,6 +54,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'intensive_django.urls'
@@ -112,5 +120,7 @@ STATICFILES_DIRS = [
 ]
 
 SITE_URL = "http://127.0.0.1:8000"
+
+MEDIA_URL = 'media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

@@ -1,13 +1,37 @@
 {% extends 'base.html' %}
+{% load index %}
 
-{% block title %}Главная страница{% endblock %}
+{% block title %}Каталог{% endblock %}
 
 {% block content %}
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1 class="text-center fw-bolder">Список вещей</h1>
-                <h4 class="text-center">А где</h4>
+                <h1 class="text-center fw-bolder">Список товаров</h1>
+
+                <div class="row justify-content-center">
+                    {% for item in items %}
+
+                        {% if forloop.first %}
+                            <h3 class="text-center">{{ item.category }}</h3>
+                        {% endif %}
+
+                        {% include 'includes/item.html' with item=item %}
+
+                        {% if not forloop.last %}
+                            {% with next_item=items|index:forloop.counter %}
+                                {% if item.category != next_item.category %}
+                                    <h3 class="text-center">{{ next_item.category }}</h3>
+                                    </div>
+                                    <div class="row justify-content-center">
+
+                                {% endif %}
+                            {% endwith %}
+                        {% endif %}
+                    {% empty %}
+                        <h4 class="text-center">Тут ничего нет :(</h4>
+                    {% endfor %}
+                    </div>
 
             </div>
         </div>

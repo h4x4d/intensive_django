@@ -13,7 +13,7 @@
                    href="{% url 'homepage:home' %}">Главная</a>
             </li>
             <li><a type="button"
-                   class="nav-link {% ifequal request.path '/about' %} fw-bold {% endifequal %} link-dark"
+                   class="nav-link {% ifequal request.path '/about/' %} fw-bold {% endifequal %} link-dark"
                    href="{% url 'about:description' %}">О нас</a>
             </li>
             <li><a type="button"

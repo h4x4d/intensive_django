@@ -1,6 +1,7 @@
 asgiref==3.5.2 
 bleach==5.0.1 
 django-cleanup==6.0.0 
+django-debug-toolbar==3.7.0 
 django-markdownfield==0.10.0 
 django==3.2.16 
 dlint==0.13.0 

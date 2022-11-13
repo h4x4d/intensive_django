@@ -1,12 +1,20 @@
 {% extends 'base.html' %}
 
-{% block title %}Главная страница{% endblock %}
+{% block title %}{{ item.name }}{% endblock %}
 
 {% block content %}
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1 class="text-center fw-bolder">Вещь №{{ pk }}</h1>
+                <h2 class="fw-bold">{{ item.name }}</h2>
+                <h3>Категория: {{ item.category.name }}</h3>
+                <h4>Теги:
+                    {% for tag in item.tags.all %}
+                        {{ tag.name }}{% if not forloop.last %},{% endif %}
+                    {% endfor %}
+                </h4>
+                <h5>{{ item.text_rendered | safe }}</h5>
+
 
             </div>
         </div>

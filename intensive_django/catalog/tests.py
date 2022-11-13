@@ -5,6 +5,8 @@ from .models import Category, Item, Tag
 
 
 class CatalogURLTests(TestCase):
+    fixtures = ['fixtures/data.json', ]
+
     def test_catalog_default(self):
         response = Client().get("/catalog/")
         self.assertEqual(response.status_code, 200,
@@ -12,7 +14,7 @@ class CatalogURLTests(TestCase):
                          f" Expected: {200}")
 
     def test_catalog_items(self):
-        tests = (("123", 200), ("asd", 404), ("0", 404),
+        tests = (("3", 200), ("123", 404), ("asd", 404), ("0", 404),
                  ("1.123", 404), ("-123", 404))
 
         for i in tests:
@@ -69,3 +71,29 @@ class ModelsTest(TestCase):
         self.item.tags.add(self.tag)
 
         self.assertEqual(Item.objects.count(), item_count + 1)
+
+
+class ContextTest(TestCase):
+    fixtures = ['fixtures/data.json', ]
+
+    def test_main_page_context(self):
+        response = Client().get('/')
+
+        self.assertIn('items', response.context)
+        self.assertEqual(len(response.context['items']), 2)
+        self.assertEqual(list(response.context['items']),
+                         list(Item.objects.on_main()))
+
+    def test_catalog_page_context(self):
+        response = Client().get('/catalog/')
+
+        self.assertIn('items', response.context)
+        self.assertEqual(len(response.context['items']), 5)
+        self.assertEqual(list(response.context['items']),
+                         list(Item.objects.category_sorted()))
+
+    def test_catalog_item_page_context(self):
+        response = Client().get('/catalog/3/')
+
+        self.assertIn('item', response.context)
+        self.assertEqual(response.context['item'], Item.objects.get(pk=3))

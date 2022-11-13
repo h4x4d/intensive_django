@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Prefetch
 
 from Core.models import PublishedBaseModel, NamedBaseModel, SlugBaseModel, \
     ImageBaseModel
@@ -6,6 +7,21 @@ from markdownfield.models import MarkdownField, RenderedMarkdownField
 from markdownfield.validators import VALIDATOR_NULL
 
 from .validators import validate_must_be_param
+
+
+class ItemManager(models.Manager):
+    def published(self):
+        return (self.get_queryset().filter(is_published=True)
+                .select_related('category')
+                .order_by('name')
+                .prefetch_related(Prefetch('tags',
+                                           queryset=Tag.objects.all())))
+
+    def category_sorted(self):
+        return self.published().order_by('category', 'name')
+
+    def on_main(self):
+        return self.published().filter(is_on_main=True)
 
 
 class Category(PublishedBaseModel, NamedBaseModel, SlugBaseModel):
@@ -29,6 +45,8 @@ class Tag(PublishedBaseModel, NamedBaseModel, SlugBaseModel):
 
 
 class Item(PublishedBaseModel, NamedBaseModel):
+    objects = ItemManager()
+
     category = models.ForeignKey(Category, on_delete=models.CASCADE,
                                  related_name="items")
     tags = models.ManyToManyField(Tag, related_name="items")
@@ -37,6 +55,8 @@ class Item(PublishedBaseModel, NamedBaseModel):
                          validators=[validate_must_be_param("превосходно",
                                                             "роскошно")])
     text_rendered = RenderedMarkdownField(default="")
+
+    is_on_main = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = "Товар"

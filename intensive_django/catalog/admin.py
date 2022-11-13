@@ -57,6 +57,7 @@ class AdminGalleryImage(admin.ModelAdmin):
                              qualify=51)
 
     def img_thumb(self, obj):
+        print(obj)
         if obj.item:
             return mark_safe(f'<img src="{self.get_img(obj).url}">')
         return "Нет изображения"

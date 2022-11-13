@@ -7,7 +7,18 @@
         <div class="row">
             <div class="col-md-12">
                 <h1 class="text-center fw-bolder">Главная страница</h1>
+                <h3 class="text-center fw-bolder">Наши товары:</h3>
+                <br>
             </div>
+
+            <div class="row justify-content-center">
+                {% for item in items %}
+                    {% include 'includes/item.html' with item=item %}
+                {% empty %}
+                    <h4 class="text-center">Тут ничего нет :(</h4>
+                {% endfor %}
+            </div>
+
         </div>
     </div>
 {% endblock %}
