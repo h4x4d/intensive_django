@@ -146,37 +146,64 @@
     "model": "catalog.mainimage",
     "pk": 4,
     "fields": {
-      "image": "images/square_320_46e0e343780ce42d3674773a41d5bd9c.jpg",
+      "image": "images/REV_373_art.png",
       "item": 5
+    }
+  },
+  {
+    "model": "catalog.mainimage",
+    "pk": 5,
+    "fields": {
+      "image": "images/REV_827_art.png",
+      "item": 7
+    }
+  },
+  {
+    "model": "catalog.mainimage",
+    "pk": 7,
+    "fields": {
+      "image": "images/REV_827t_art.jpg",
+      "item": 4
+    }
+  },
+  {
+    "model": "catalog.mainimage",
+    "pk": 8,
+    "fields": {
+      "image": "images/Volatile_Skeleton_full_rYSsa1S.png",
+      "item": 3
+    }
+  },
+  {
+    "model": "catalog.mainimage",
+    "pk": 9,
+    "fields": {
+      "image": "images/Dredger_Staff_full.png",
+      "item": 6
     }
   },
   {
     "model": "catalog.galleryimage",
-    "pk": 2,
+    "pk": 6,
     "fields": {
-      "image": "images/square_320_46e0e343780ce42d3674773a41d5bd9c.jpg",
-      "item": 5
+      "image": "images/REV_933t_art.jpg",
+      "item": 6
     }
   },
   {
-    "model": "thumbnail.kvstore",
-    "pk": "sorl-thumbnail||image||59ba1ae86f0849658b85c7a6932f0bdd",
+    "model": "catalog.galleryimage",
+    "pk": 7,
     "fields": {
-      "value": "{\"name\": \"images/square_320_46e0e343780ce42d3674773a41d5bd9c.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [320, 320]}"
+      "image": "images/REV_826_art.jpg",
+      "item": 6
     }
   },
   {
-    "model": "thumbnail.kvstore",
-    "pk": "sorl-thumbnail||image||befd902a84eadb9514556d234eb4ab1c",
+    "model": "catalog.galleryimage",
+    "pk": 8,
     "fields": {
-      "value": "{\"name\": \"cache/d2/8d/d28d6e8c2908c411d215050061629415.jpg\", \"storage\": \"django.core.files.storage.FileSystemStorage\", \"size\": [300, 300]}"
-    }
-  },
-  {
-    "model": "thumbnail.kvstore",
-    "pk": "sorl-thumbnail||thumbnails||59ba1ae86f0849658b85c7a6932f0bdd",
-    "fields": {
-      "value": "[\"befd902a84eadb9514556d234eb4ab1c\"]"
+      "image": "images/REV_240_art.png",
+      "item": 6
     }
   }
 ]
