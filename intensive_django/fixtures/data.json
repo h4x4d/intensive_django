@@ -89,7 +89,7 @@
       "name": "Пароход",
       "category": 2,
       "text": "Роскошно",
-      "text_rendered": "",
+      "text_rendered": "<p>Роскошно</p>",
       "is_on_main": false,
       "tags": [
         6
@@ -104,7 +104,7 @@
       "name": "Самолет",
       "category": 2,
       "text": "Превосходно",
-      "text_rendered": "",
+      "text_rendered": "<p>Превосходно</p>",
       "is_on_main": false,
       "tags": [
         4,

@@ -10,6 +10,6 @@ def item_list(request):
 
 
 def item_detail(request, pk):
-    item = get_object_or_404(Item, pk=int(pk))
+    item = get_object_or_404(Item, pk=pk)
 
     return render(request, 'catalog/item.html', {'item': item})

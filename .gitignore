@@ -12,3 +12,4 @@ virtualvenv/
 generate_requirements.py
 
 old_migrations/
+/intensive_django/media/

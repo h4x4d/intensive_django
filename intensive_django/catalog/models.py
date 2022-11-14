@@ -12,13 +12,12 @@ from .validators import validate_must_be_param
 class ItemManager(models.Manager):
     def published(self):
         return (self.get_queryset().filter(is_published=True)
-                .select_related('category')
-                .order_by('name')
+                .select_related('category', 'mainimage')
                 .prefetch_related(Prefetch('tags',
                                            queryset=Tag.objects.all())))
 
     def category_sorted(self):
-        return self.published().order_by('category', 'name')
+        return self.published().order_by('category__name')
 
     def on_main(self):
         return self.published().filter(is_on_main=True)
@@ -61,6 +60,7 @@ class Item(PublishedBaseModel, NamedBaseModel):
     class Meta:
         verbose_name = "Товар"
         verbose_name_plural = "Товары"
+        ordering = ['name']
 
     def __str__(self):
         return self.name
