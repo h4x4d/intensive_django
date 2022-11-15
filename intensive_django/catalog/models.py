@@ -3,7 +3,7 @@ from django.db.models import Prefetch
 from markdownfield.models import MarkdownField, RenderedMarkdownField
 from markdownfield.validators import VALIDATOR_NULL
 
-from catalog.validators import validate_must_be_param
+from catalog.validators import ValidateMustBeParam
 from Core.models import (ImageBaseModel, NamedBaseModel, PublishedBaseModel,
                          SlugBaseModel)
 
@@ -50,8 +50,8 @@ class Item(PublishedBaseModel, NamedBaseModel):
     tags = models.ManyToManyField(Tag, related_name="items")
     text = MarkdownField(rendered_field='text_rendered',
                          validator=VALIDATOR_NULL,
-                         validators=[validate_must_be_param("превосходно",
-                                                            "роскошно")])
+                         validators=[ValidateMustBeParam("превосходно",
+                                                         "роскошно")])
     text_rendered = RenderedMarkdownField(default="")
 
     is_on_main = models.BooleanField(default=False)
