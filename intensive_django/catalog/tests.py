@@ -1,7 +1,7 @@
 from django.core.exceptions import ValidationError
-from django.test import TestCase, Client
+from django.test import Client, TestCase
 
-from .models import Category, Item, Tag
+from catalog.models import Category, Item, Tag
 
 
 class CatalogURLTests(TestCase):

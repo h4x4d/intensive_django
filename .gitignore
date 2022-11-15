@@ -9,7 +9,9 @@ db.sqlite3
 venv/
 env/
 virtualvenv/
+
 generate_requirements.py
+sort_imports.py
 
 old_migrations/
 /intensive_django/media/

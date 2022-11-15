@@ -21,6 +21,8 @@ optional = true
 [tool.poetry.group.dev.dependencies]
 flake8 = "^5.0.4"
 dlint = "^0.13.0"
+isort = "^5.10.1"
+absolufy-imports = "^0.3.1"
 
 [build-system]
 requires = ["poetry-core"]

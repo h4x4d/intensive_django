@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.utils.safestring import mark_safe
 from sorl.thumbnail import get_thumbnail
 
-from .models import Item, Tag, Category, MainImage, GalleryImage
+from catalog.models import Category, GalleryImage, Item, MainImage, Tag
 
 
 @admin.register(Item)
@@ -57,7 +57,6 @@ class AdminGalleryImage(admin.ModelAdmin):
                              qualify=51)
 
     def img_thumb(self, obj):
-        print(obj)
         if obj.item:
             return mark_safe(f'<img src="{self.get_img(obj).url}">')
         return "Нет изображения"

@@ -1,12 +1,11 @@
 from django.db import models
 from django.db.models import Prefetch
-
-from Core.models import PublishedBaseModel, NamedBaseModel, SlugBaseModel, \
-    ImageBaseModel
 from markdownfield.models import MarkdownField, RenderedMarkdownField
 from markdownfield.validators import VALIDATOR_NULL
 
-from .validators import validate_must_be_param
+from catalog.validators import validate_must_be_param
+from Core.models import (ImageBaseModel, NamedBaseModel, PublishedBaseModel,
+                         SlugBaseModel)
 
 
 class ItemManager(models.Manager):
@@ -17,7 +16,7 @@ class ItemManager(models.Manager):
                                            queryset=Tag.objects.all())))
 
     def category_sorted(self):
-        return self.published().order_by('category__name')
+        return self.published().order_by('category__name', "name")
 
     def on_main(self):
         return self.published().filter(is_on_main=True)
