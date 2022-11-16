@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'sorl.thumbnail',
     'django_cleanup.apps.CleanupConfig',
     'debug_toolbar',
-    'catalog.templatetags.index'
+    'catalog.templatetags.define_action'
 ]
 
 INTERNAL_IPS = [

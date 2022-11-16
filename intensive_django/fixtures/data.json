@@ -141,5 +141,20 @@
         5
       ]
     }
+  },
+  {
+    "model": "catalog.item",
+    "pk": 8,
+    "fields": {
+      "is_published": true,
+      "name": "Коттедж",
+      "category": 3,
+      "text": "**Превосходно**",
+      "text_rendered": "<p><strong>Превосходно</strong></p>",
+      "is_on_main": false,
+      "tags": [
+        5
+      ]
+    }
   }
 ]

@@ -12,13 +12,18 @@
             </div>
 
             <div class="row justify-content-center">
-                {% for item in items %}
-                    {% include 'includes/item.html' with item=item %}
-                {% empty %}
-                    <h4 class="text-center">Тут ничего нет :(</h4>
-                {% endfor %}
+                <div class="row justify-content-center">
+                    {% for item in page_obj %}
+
+                        {% include 'includes/item.html' with item=item %}
+
+                    {% empty %}
+                        <h4 class="text-center">Тут ничего нет :(</h4>
+                    {% endfor %}
+                    </div>
             </div>
 
         </div>
+        {% include 'includes/pagination.html' %}
     </div>
 {% endblock %}

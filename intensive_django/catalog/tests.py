@@ -79,18 +79,26 @@ class ContextTest(TestCase):
     def test_main_page_context(self):
         response = Client().get('/')
 
-        self.assertIn('items', response.context)
-        self.assertEqual(len(response.context['items']), 2)
-        self.assertEqual(list(response.context['items']),
+        self.assertIn('page_obj', response.context)
+        self.assertEqual(len(response.context['page_obj']), 2)
+        self.assertEqual(list(response.context['page_obj']),
                          list(Item.objects.on_main()))
 
-    def test_catalog_page_context(self):
+    def test_catalog_page_context_page_1(self):
         response = Client().get('/catalog/')
 
-        self.assertIn('items', response.context)
-        self.assertEqual(len(response.context['items']), 5)
-        self.assertEqual(list(response.context['items']),
-                         list(Item.objects.category_sorted()))
+        self.assertIn('page_obj', response.context)
+        self.assertEqual(len(response.context['page_obj']), 5)
+        self.assertEqual(list(response.context['page_obj']),
+                         list(Item.objects.category_sorted()[:5]))
+
+    def test_catalog_page_context_page_2(self):
+        response = Client().get('/catalog/?page=2')
+
+        self.assertIn('page_obj', response.context)
+        self.assertEqual(len(response.context['page_obj']), 1)
+        self.assertEqual(list(response.context['page_obj']),
+                         list(Item.objects.category_sorted()[5:]))
 
     def test_catalog_item_page_context(self):
         response = Client().get('/catalog/3/')

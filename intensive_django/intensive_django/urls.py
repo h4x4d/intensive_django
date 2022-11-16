@@ -10,6 +10,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 ]
 
+handler404 = 'Core.views.handler_404'
+
 
 if settings.DEBUG:
     import debug_toolbar
