@@ -1,0 +1,160 @@
+[
+  {
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+      "is_published": true,
+      "name": "Транспорт",
+      "slug": "transport_1",
+      "weight": 100
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+      "is_published": true,
+      "name": "Недвижимость",
+      "slug": "immovable_2",
+      "weight": 100
+    }
+  },
+  {
+    "model": "catalog.tag",
+    "pk": 3,
+    "fields": {
+      "is_published": true,
+      "name": "Ездит",
+      "slug": "drives_1"
+    }
+  },
+  {
+    "model": "catalog.tag",
+    "pk": 4,
+    "fields": {
+      "is_published": true,
+      "name": "Летает",
+      "slug": "flyes_2"
+    }
+  },
+  {
+    "model": "catalog.tag",
+    "pk": 5,
+    "fields": {
+      "is_published": true,
+      "name": "Стоит",
+      "slug": "stands_3"
+    }
+  },
+  {
+    "model": "catalog.tag",
+    "pk": 6,
+    "fields": {
+      "is_published": true,
+      "name": "Плавает",
+      "slug": "swims_4"
+    }
+  },
+  {
+    "model": "catalog.tag",
+    "pk": 7,
+    "fields": {
+      "is_published": true,
+      "name": "Тонет",
+      "slug": "sinks_5"
+    }
+  },
+  {
+    "model": "catalog.item",
+    "pk": 3,
+    "fields": {
+      "is_published": true,
+      "name": "Машина",
+      "category": 2,
+      "text": "превосходно",
+      "text_rendered": "<p>превосходно</p>",
+      "is_on_main": true,
+      "tags": [
+        3,
+        5,
+        7
+      ]
+    }
+  },
+  {
+    "model": "catalog.item",
+    "pk": 4,
+    "fields": {
+      "is_published": true,
+      "name": "Пароход",
+      "category": 2,
+      "text": "Роскошно",
+      "text_rendered": "<p>Роскошно</p>",
+      "is_on_main": false,
+      "tags": [
+        6
+      ]
+    }
+  },
+  {
+    "model": "catalog.item",
+    "pk": 5,
+    "fields": {
+      "is_published": true,
+      "name": "Самолет",
+      "category": 2,
+      "text": "Превосходно",
+      "text_rendered": "<p>Превосходно</p>",
+      "is_on_main": false,
+      "tags": [
+        4,
+        6
+      ]
+    }
+  },
+  {
+    "model": "catalog.item",
+    "pk": 6,
+    "fields": {
+      "is_published": true,
+      "name": "Дом",
+      "category": 3,
+      "text": "Роскошно 1 2 3 4 5 6 7 8 9 10 11",
+      "text_rendered": "<p>Роскошно 1 2 3 4 5 6 7 8 9 10 11</p>",
+      "is_on_main": true,
+      "tags": [
+        5
+      ]
+    }
+  },
+  {
+    "model": "catalog.item",
+    "pk": 7,
+    "fields": {
+      "is_published": true,
+      "name": "Квартира",
+      "category": 3,
+      "text": "**Превосходно**",
+      "text_rendered": "<p><strong>Превосходно</strong></p>",
+      "is_on_main": false,
+      "tags": [
+        5
+      ]
+    }
+  },
+  {
+    "model": "catalog.item",
+    "pk": 8,
+    "fields": {
+      "is_published": true,
+      "name": "Коттедж",
+      "category": 3,
+      "text": "**Превосходно**",
+      "text_rendered": "<p><strong>Превосходно</strong></p>",
+      "is_on_main": false,
+      "tags": [
+        5
+      ]
+    }
+  }
+]

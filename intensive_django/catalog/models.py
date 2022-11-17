@@ -1,11 +1,25 @@
 from django.db import models
-
-from Core.models import PublishedBaseModel, NamedBaseModel, SlugBaseModel, \
-    ImageBaseModel
+from django.db.models import Prefetch
 from markdownfield.models import MarkdownField, RenderedMarkdownField
 from markdownfield.validators import VALIDATOR_NULL
 
-from .validators import validate_must_be_param
+from catalog.validators import ValidateMustBeParam
+from Core.models import (ImageBaseModel, NamedBaseModel, PublishedBaseModel,
+                         SlugBaseModel)
+
+
+class ItemManager(models.Manager):
+    def published(self):
+        return (self.get_queryset().filter(is_published=True)
+                .select_related('category', 'mainimage')
+                .prefetch_related(Prefetch('tags',
+                                           queryset=Tag.objects.all())))
+
+    def category_sorted(self):
+        return self.published().order_by('category__name', "name")
+
+    def on_main(self):
+        return self.published().filter(is_on_main=True)
 
 
 class Category(PublishedBaseModel, NamedBaseModel, SlugBaseModel):
@@ -29,18 +43,23 @@ class Tag(PublishedBaseModel, NamedBaseModel, SlugBaseModel):
 
 
 class Item(PublishedBaseModel, NamedBaseModel):
+    objects = ItemManager()
+
     category = models.ForeignKey(Category, on_delete=models.CASCADE,
                                  related_name="items")
     tags = models.ManyToManyField(Tag, related_name="items")
     text = MarkdownField(rendered_field='text_rendered',
                          validator=VALIDATOR_NULL,
-                         validators=[validate_must_be_param("превосходно",
-                                                            "роскошно")])
+                         validators=[ValidateMustBeParam("превосходно",
+                                                         "роскошно")])
     text_rendered = RenderedMarkdownField(default="")
+
+    is_on_main = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = "Товар"
         verbose_name_plural = "Товары"
+        ordering = ['name']
 
     def __str__(self):
         return self.name

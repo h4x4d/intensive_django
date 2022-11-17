@@ -2,6 +2,7 @@ import re
 from functools import wraps
 
 from django.forms import ValidationError
+from django.utils.deconstruct import deconstructible
 
 
 def validate_brilliant(value):
@@ -29,3 +30,16 @@ def validate_must_be_param(*args):
         return value
 
     return _inner
+
+
+@deconstructible
+class ValidateMustBeParam:
+    def __init__(self, *args):
+        self.args = set(args)
+
+    def __call__(self, value):
+        check_value = re.sub(r'[^\w\s]', ' ', value.lower())
+
+        if len(self.args & set(check_value.split())) == 0:
+            raise ValidationError(
+                f"Обязательно используйте слово {' или '.join(self.args)}")

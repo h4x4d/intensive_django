@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.utils.safestring import mark_safe
 from sorl.thumbnail import get_thumbnail
 
-from .models import Item, Tag, Category, MainImage, GalleryImage
+from catalog.models import Category, GalleryImage, Item, MainImage, Tag
 
 
 @admin.register(Item)

@@ -1,7 +1,8 @@
 import os
 from pathlib import Path
-from dotenv import load_dotenv
+
 from django_cleanup.signals import cleanup_pre_delete
+from dotenv import load_dotenv
 from sorl.thumbnail import delete
 
 
@@ -38,6 +39,12 @@ INSTALLED_APPS = [
     'markdownfield',
     'sorl.thumbnail',
     'django_cleanup.apps.CleanupConfig',
+    'debug_toolbar',
+    'catalog.templatetags.define_action'
+]
+
+INTERNAL_IPS = [
+    '127.0.0.1',
 ]
 
 MIDDLEWARE = [
@@ -48,6 +55,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'intensive_django.urls'
@@ -112,5 +121,9 @@ STATICFILES_DIRS = [
 ]
 
 SITE_URL = "http://127.0.0.1:8000"
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+MEDIA_URL = 'media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
