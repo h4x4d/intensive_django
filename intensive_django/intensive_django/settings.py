@@ -14,15 +14,15 @@ cleanup_pre_delete.connect(sorl_delete)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-load_dotenv(os.path.join(BASE_DIR, ".env"))
+load_dotenv(os.path.join(BASE_DIR, '.env'))
 
-SECRET_KEY = os.environ.get("SECRET_KEY", default="not_so_secret")
+SECRET_KEY = os.environ.get('SECRET_KEY', default='not_so_secret')
 
-DEBUG = bool(int(os.environ.get("DEBUG", default="0")))
+DEBUG = bool(int(os.environ.get('DEBUG', default='0')))
 
-hosts = os.environ.get("ALLOWED_HOSTS", default="").split(";")
-if "" in hosts:
-    hosts.remove("")
+hosts = os.environ.get('ALLOWED_HOSTS', default='').split(';')
+if '' in hosts:
+    hosts.remove('')
 
 ALLOWED_HOSTS = hosts
 
@@ -117,12 +117,12 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
-    BASE_DIR / "static-dev",
+    BASE_DIR / 'static-dev',
 ]
 
-SITE_URL = "http://127.0.0.1:8000"
+SITE_URL = 'http://127.0.0.1:8000'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = 'media/'
 

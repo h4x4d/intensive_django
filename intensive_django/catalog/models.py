@@ -16,7 +16,7 @@ class ItemManager(models.Manager):
                                            queryset=Tag.objects.all())))
 
     def category_sorted(self):
-        return self.published().order_by('category__name', "name")
+        return self.published().order_by('category__name', 'name')
 
     def on_main(self):
         return self.published().filter(is_on_main=True)
@@ -26,8 +26,8 @@ class Category(PublishedBaseModel, NamedBaseModel, SlugBaseModel):
     weight = models.SmallIntegerField(default=100)
 
     class Meta:
-        verbose_name = "Каталог"
-        verbose_name_plural = "Каталоги"
+        verbose_name = 'Каталог'
+        verbose_name_plural = 'Каталоги'
 
     def __str__(self):
         return self.name
@@ -35,8 +35,8 @@ class Category(PublishedBaseModel, NamedBaseModel, SlugBaseModel):
 
 class Tag(PublishedBaseModel, NamedBaseModel, SlugBaseModel):
     class Meta:
-        verbose_name = "Тэг"
-        verbose_name_plural = "Тэги"
+        verbose_name = 'Тэг'
+        verbose_name_plural = 'Тэги'
 
     def __str__(self):
         return self.name
@@ -46,19 +46,19 @@ class Item(PublishedBaseModel, NamedBaseModel):
     objects = ItemManager()
 
     category = models.ForeignKey(Category, on_delete=models.CASCADE,
-                                 related_name="items")
-    tags = models.ManyToManyField(Tag, related_name="items")
+                                 related_name='items')
+    tags = models.ManyToManyField(Tag, related_name='items')
     text = MarkdownField(rendered_field='text_rendered',
                          validator=VALIDATOR_NULL,
-                         validators=[ValidateMustBeParam("превосходно",
-                                                         "роскошно")])
-    text_rendered = RenderedMarkdownField(default="")
+                         validators=[ValidateMustBeParam('превосходно',
+                                                         'роскошно')])
+    text_rendered = RenderedMarkdownField(default='')
 
     is_on_main = models.BooleanField(default=False)
 
     class Meta:
-        verbose_name = "Товар"
-        verbose_name_plural = "Товары"
+        verbose_name = 'Товар'
+        verbose_name_plural = 'Товары'
         ordering = ['name']
 
     def __str__(self):
@@ -69,11 +69,11 @@ class MainImage(ImageBaseModel):
     item = models.OneToOneField(Item, on_delete=models.CASCADE)
 
     class Meta:
-        verbose_name = "Главное изображение"
-        verbose_name_plural = "Главные изображения"
+        verbose_name = 'Главное изображение'
+        verbose_name_plural = 'Главные изображения'
 
     def __str__(self):
-        return "Изображение " + self.item.name
+        return 'Изображение ' + self.item.name
 
 
 class GalleryImage(ImageBaseModel):
@@ -81,8 +81,8 @@ class GalleryImage(ImageBaseModel):
                              related_name='images')
 
     class Meta:
-        verbose_name = "Изображение"
-        verbose_name_plural = "Изображения"
+        verbose_name = 'Изображение'
+        verbose_name_plural = 'Изображения'
 
     def __str__(self):
-        return "Изображение '" + self.item.name + "'"
+        return 'Изображение "' + self.item.name + '"'

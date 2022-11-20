@@ -6,12 +6,12 @@ from django.utils.deconstruct import deconstructible
 
 
 def validate_brilliant(value):
-    need_words = {"превосходно", "роскошно"}
+    need_words = {'превосходно', 'роскошно'}
     check_value = re.sub(r'[^\w\s]', ' ', value.lower())
 
     if len(need_words & set(check_value.split())) == 0:
         raise ValidationError(
-            f"Обязательно используйте слово {' или '.join(need_words)}")
+            f'Обязательно используйте слово {" или ".join(need_words)}')
 
     return value
 
@@ -25,7 +25,7 @@ def validate_must_be_param(*args):
 
         if len(args & set(check_value.split())) == 0:
             raise ValidationError(
-                f"Обязательно используйте слово {' или '.join(args)}")
+                f'Обязательно используйте слово {" или ".join(args)}')
 
         return value
 
@@ -42,4 +42,4 @@ class ValidateMustBeParam:
 
         if len(self.args & set(check_value.split())) == 0:
             raise ValidationError(
-                f"Обязательно используйте слово {' или '.join(self.args)}")
+                f'Обязательно используйте слово {" или ".join(self.args)}')

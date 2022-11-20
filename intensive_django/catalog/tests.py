@@ -8,23 +8,23 @@ class CatalogURLTests(TestCase):
     fixtures = ['fixtures/data.json', ]
 
     def test_catalog_default(self):
-        response = Client().get("/catalog/")
+        response = Client().get('/catalog/')
         self.assertEqual(response.status_code, 200,
-                         f"Unexpected status code: {response.status_code}."
-                         f" Expected: {200}")
+                         f'Unexpected status code: {response.status_code}.'
+                         f' Expected: {200}')
 
     def test_catalog_items(self):
-        tests = (("3", 200), ("123", 404), ("asd", 404), ("0", 404),
-                 ("1.123", 404), ("-123", 404))
+        tests = (('3', 200), ('123', 404), ('asd', 404), ('0', 404),
+                 ('1.123', 404), ('-123', 404))
 
         for i in tests:
             pk, status_code = i
             with self.subTest(pk=pk, status_code=status_code):
-                response = Client().get(f"/catalog/{pk}/")
+                response = Client().get(f'/catalog/{pk}/')
                 self.assertEqual(response.status_code, status_code,
-                                 f"Unexpected status code: "
-                                 f"{response.status_code}."
-                                 f" Expected: {status_code}")
+                                 f'Unexpected status code: '
+                                 f'{response.status_code}.'
+                                 f' Expected: {status_code}')
 
 
 class ModelsTest(TestCase):
@@ -47,7 +47,7 @@ class ModelsTest(TestCase):
         with self.assertRaises(ValidationError):
             self.item = Item(name='Test_item',
                              category=self.category,
-                             text="Random text",
+                             text='Random text',
                              )
 
             self.item.full_clean()
@@ -62,7 +62,7 @@ class ModelsTest(TestCase):
 
         self.item = Item(name='Test_item',
                          category=self.category,
-                         text="Random text, but with 'Роскошно'",
+                         text='Random text, but with "Роскошно"',
                          )
 
         self.item.full_clean()

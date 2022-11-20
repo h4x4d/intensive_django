@@ -3,14 +3,14 @@ from django.db import models
 
 
 class PublishedBaseModel(models.Model):
-    is_published = models.BooleanField("Опубликовано", default=True)
+    is_published = models.BooleanField('Опубликовано', default=True)
 
     class Meta:
         abstract = True
 
 
 class NamedBaseModel(models.Model):
-    name = models.CharField("Название", max_length=150)
+    name = models.CharField('Название', max_length=150)
 
     class Meta:
         abstract = True
