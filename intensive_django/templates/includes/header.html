@@ -20,6 +20,10 @@
                    class="nav-link {% if '/catalog/' in request.path %} fw-bold {% endif %} link-dark"
                    href="{% url 'catalog:item_list' %}">Каталог</a>
             </li>
+            <li><a type="button"
+                   class="nav-link {% ifequal request.path '/feedback/' %} fw-bold {% endifequal %} link-dark"
+                   href="{% url 'feedback:feedback' %}">Обратная связь</a>
+            </li>
         </ul>
     </header>
 </div>
