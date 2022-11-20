@@ -28,4 +28,3 @@ def feedback(request):
         return redirect('feedback:feedback')
 
     return render(request, 'feedback/index.html', context)
-

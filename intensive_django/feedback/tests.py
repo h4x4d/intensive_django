@@ -25,4 +25,3 @@ class FeedBackTest(TestCase):
         form = response.context['form']
         self.assertEqual(form['text'].help_text, 'Максимум: 1000 символов')
         self.assertEqual(form['text'].label, 'Текст обращения')
-
