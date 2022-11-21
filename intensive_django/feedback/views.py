@@ -1,3 +1,5 @@
+import os
+
 from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 
@@ -6,24 +8,24 @@ from feedback.models import FeedBack
 
 
 def feedback(request):
+
     form = FeedBackForm(request.POST or None)
     context = {
         'form': form,
     }
 
     if request.method == 'POST' and form.is_valid():
+        FeedBack.objects.create(
+            **form.cleaned_data
+        )
+
         send_mail(
             'Новая обратная связь по форме',
             f'{form.cleaned_data.get("text")}',
-            'feedback@intensive.app',
-            ('admin@intensive.app',),
+            os.getenv('FROM_MAIL', ''),
+            (os.getenv('TO_MAIL', '').split(';'),),
             fail_silently=True
         )
-
-        new_feedback = FeedBack.objects.create(
-            **form.cleaned_data
-        )
-        new_feedback.save()
 
         return redirect('feedback:feedback')
 
