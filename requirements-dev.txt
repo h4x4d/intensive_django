@@ -7,6 +7,7 @@ django-markdownfield==0.10.0
 django==3.2.16 
 dlint==0.13.0 
 flake8-quotes==3.3.1 
+flake8-tidy-imports==4.8.0 
 flake8==5.0.4 
 isort==5.10.1 
 markdown==3.4.1 

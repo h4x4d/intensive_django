@@ -1,10 +1,9 @@
-import os
-
 from django.core.mail import send_mail
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect, render
 
 from feedback.forms import FeedBackForm
 from feedback.models import FeedBack
+from intensive_django.settings import FROM_MAIL, TO_MAIL
 
 
 def feedback(request):
@@ -22,8 +21,8 @@ def feedback(request):
         send_mail(
             'Новая обратная связь по форме',
             f'{form.cleaned_data.get("text")}',
-            os.getenv('FROM_MAIL', ''),
-            (os.getenv('TO_MAIL', '').split(';'),),
+            FROM_MAIL,
+            TO_MAIL,
             fail_silently=True
         )
 

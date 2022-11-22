@@ -26,6 +26,9 @@ if '' in hosts:
 
 ALLOWED_HOSTS = hosts
 
+TO_MAIL = os.environ['TO_MAIL'].split(';')
+FROM_MAIL = os.environ['FROM_MAIL']
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',

@@ -120,6 +120,17 @@ python-versions = "*"
 flake8 = "*"
 
 [[package]]
+name = "flake8-tidy-imports"
+version = "4.8.0"
+description = "A flake8 plugin that helps you write tidier imports."
+category = "dev"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+flake8 = ">=3.8.0"
+
+[[package]]
 name = "isort"
 version = "5.10.1"
 description = "A Python utility / library to sort Python imports."
@@ -242,7 +253,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "7466d2e0c3761a63a175c182001fa5030a2c8b08b595e8d704238da9944c87f9"
+content-hash = "be2055b4394adbf36209d811ab5d1a66abc84fb7aef8b23c7f5f7bf58baf35ce"
 
 [metadata.files]
 absolufy-imports = [
@@ -282,6 +293,10 @@ flake8 = [
 ]
 flake8-quotes = [
     {file = "flake8-quotes-3.3.1.tar.gz", hash = "sha256:633adca6fb8a08131536af0d750b44d6985b9aba46f498871e21588c3e6f525a"},
+]
+flake8-tidy-imports = [
+    {file = "flake8-tidy-imports-4.8.0.tar.gz", hash = "sha256:df44f9c841b5dfb3a7a1f0da8546b319d772c2a816a1afefcce43e167a593d83"},
+    {file = "flake8_tidy_imports-4.8.0-py3-none-any.whl", hash = "sha256:25bd9799358edefa0e010ce2c587b093c3aba942e96aeaa99b6d0500ae1bf09c"},
 ]
 isort = [
     {file = "isort-5.10.1-py3-none-any.whl", hash = "sha256:6f62d78e2f89b4500b080fe3a81690850cd254227f27f75c3a0c491a1f351ba7"},
