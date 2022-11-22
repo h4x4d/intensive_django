@@ -40,4 +40,5 @@ jobs:
 
       - name: Test with unittest
         run: |
+          cd intensive_django
           python manage.py test
