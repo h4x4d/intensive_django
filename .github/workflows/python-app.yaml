@@ -25,6 +25,11 @@ jobs:
           python -m pip install --upgrade pip
           if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; fi
 
+      - name: Copy .env file
+        run: |
+          cd intensive_django
+          cp .env-example .env
+
       - name: Lint with flake8
         run: |
           flake8 . --count --show-source --statistics
@@ -35,5 +40,4 @@ jobs:
 
       - name: Test with unittest
         run: |
-          cd intensive_django
           python manage.py test
