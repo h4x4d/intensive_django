@@ -40,12 +40,18 @@ INSTALLED_APPS = [
     'catalog.apps.CatalogConfig',
     'homepage.apps.HomepageConfig',
     'feedback.apps.FeedbackConfig',
+    'users.apps.UsersConfig',
     'markdownfield',
     'sorl.thumbnail',
+    'crispy_forms',
+    'crispy_bootstrap5',
     'django_cleanup.apps.CleanupConfig',
     'debug_toolbar',
-    'catalog.templatetags.define_action'
+    'catalog.templatetags.define_action',
 ]
+
+AUTH_USER_MODEL = 'users.Account'
+
 
 INTERNAL_IPS = [
     '127.0.0.1',
@@ -69,7 +75,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'templates')
+            os.path.join(BASE_DIR, 'templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -134,3 +140,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_emails')
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
+
+LOGIN_URL = '/users/login/'
+LOGIN_REDIRECT_URL = '/users/profile/'

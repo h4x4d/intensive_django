@@ -9,40 +9,7 @@
                 <h1 class="text-center fw-bolder">Обратная связь</h1>
             </div>
 
-            <form method="post">
-                {% csrf_token %}
-
-                {% if form.errors %}
-                    {% for field in form %}
-                        {% for error in field.errors %}
-
-                            <div class="alert alert-danger" role="alert">
-                                {{ error|escape }}
-                            </div>
-
-                        {% endfor %}
-                    {% endfor %}
-                {% endif %}
-
-                {% for error in form.non_field_errors %}
-                    <div class="alert alert-danger" role="alert">
-                        {{ error|escape }}
-                    </div>
-                {% endfor %}
-
-                {% for field in form %}
-                    {{ field.label_tag }}
-                    {{ field }}
-                    {% if field.help_text %}
-                        {{ field.help_text|safe }}
-                    {% endif %}
-                {% endfor %}
-            <br>
-
-                <button class="btn btn-outline-primary" type="submit">
-                    Отправить
-                </button>
-            </form>
+            {% include 'includes/form.html' with form_method='post' button_name='Отправить!' %}
 
         </div>
     </div>

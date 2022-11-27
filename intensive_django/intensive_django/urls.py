@@ -8,6 +8,7 @@ urlpatterns = [
     path('catalog/', include('catalog.urls')),
     path('about/', include('about.urls')),
     path('feedback/', include('feedback.urls')),
+    path('users/', include('users.urls'),),
     path('admin/', admin.site.urls),
 ]
 
@@ -23,5 +24,5 @@ if settings.DEBUG:
                           document_root=settings.STATIC_ROOT)
 
     urlpatterns += [
-        path('__debug__/', include(debug_toolbar.urls))
+        path('__debug__/', include(debug_toolbar.urls)),
     ]

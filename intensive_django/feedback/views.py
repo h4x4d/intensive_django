@@ -7,23 +7,20 @@ from intensive_django.settings import FROM_MAIL, TO_MAIL
 
 
 def feedback(request):
-
     form = FeedBackForm(request.POST or None)
     context = {
         'form': form,
     }
 
     if request.method == 'POST' and form.is_valid():
-        FeedBack.objects.create(
-            **form.cleaned_data
-        )
+        FeedBack.objects.create(**form.cleaned_data)
 
         send_mail(
-            'Новая обратная связь по форме',
-            f'{form.cleaned_data.get("text")}',
-            FROM_MAIL,
-            TO_MAIL,
-            fail_silently=True
+                  'Новая обратная связь по форме',
+                  f'{form.cleaned_data.get("text")}',
+                  FROM_MAIL,
+                  TO_MAIL,
+                  fail_silently=True,
         )
 
         return redirect('feedback:feedback')

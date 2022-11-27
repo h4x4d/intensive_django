@@ -5,7 +5,7 @@ from catalog.models import Category, Item, Tag
 
 
 class CatalogURLTests(TestCase):
-    fixtures = ['fixtures/data.json', ]
+    fixtures = ['fixtures/data.json']
 
     def test_catalog_default(self):
         response = Client().get('/catalog/')
@@ -74,13 +74,13 @@ class ModelsTest(TestCase):
 
 
 class ContextTest(TestCase):
-    fixtures = ['fixtures/data.json', ]
+    fixtures = ['fixtures/data.json']
 
     def test_main_page_context(self):
         response = Client().get('/')
 
         self.assertIn('page_obj', response.context)
-        self.assertEqual(len(response.context['page_obj']), 2)
+        self.assertEqual(len(response.context['page_obj']), 4)
         self.assertEqual(list(response.context['page_obj']),
                          list(Item.objects.on_main()))
 
