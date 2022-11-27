@@ -5,7 +5,6 @@ from feedback.models import FeedBack
 
 
 class FeedBackTest(TestCase):
-    fixtures = ['fixtures/data.json', ]
 
     @classmethod
     def setUpClass(cls):

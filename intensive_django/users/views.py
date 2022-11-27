@@ -1,7 +1,7 @@
 from django.contrib.auth import login
-from django.shortcuts import redirect, render, get_object_or_404
+from django.shortcuts import get_object_or_404, redirect, render
 
-from users.forms import SignUpForm, ProfileForm
+from users.forms import ProfileForm, SignUpForm
 from users.models import Account
 
 
@@ -50,7 +50,6 @@ def profile(request):
         }
 
         if request.method == 'POST' and form.is_valid():
-            print(form.cleaned_data['birthday'], form.cleaned_data['first_name'])
 
             user.first_name = form.cleaned_data['first_name']
             user.last_name = form.cleaned_data['last_name']

@@ -11,7 +11,7 @@ class SignUpForm(forms.ModelForm):
 
     class Meta:
         model = Account
-        fields = ('email', )
+        fields = ('email',)
 
     def clean_password2(self):
         password1 = self.cleaned_data.get('password1')
@@ -37,5 +37,3 @@ class ProfileForm(forms.ModelForm):
             Account.birthday.field.name: forms.DateTimeInput(
                 attrs={'type': 'date'}),
         }
-
-
