@@ -39,10 +39,11 @@ urlpatterns = [
         template_name='users/password_reset_done.html',
     ), name='password_reset_done'),
 
-    path('password_reset_confirm/<uidb64>/<token>/', PasswordResetConfirmView.as_view(
-        template_name='users/password_reset_confirm.html',
-        success_url=reverse_lazy('users:password_reset_complete'),
-    ), name='password_reset_confirm'),
+    path('password_reset_confirm/<uidb64>/<token>/',
+         PasswordResetConfirmView.as_view(
+             template_name='users/password_reset_confirm.html',
+             success_url=reverse_lazy('users:password_reset_complete'),
+         ), name='password_reset_confirm'),
 
     path('password_reset_complete/', PasswordResetCompleteView.as_view(
         template_name='users/password_reset_complete.html',
