@@ -12,5 +12,7 @@
             {% include 'includes/form.html' with form_method='post' button_name='Вход!' %}
 
         </div>
+
+            <a href="{% url 'users:password_reset' %}" class="btn btn-outline-secondary " type="button">Смена пароля</a>
     </div>
 {% endblock %}

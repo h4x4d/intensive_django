@@ -1,4 +1,5 @@
 from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 
 from users.forms import ProfileForm, SignUpForm
@@ -35,30 +36,28 @@ def user_detail(request, pk):
     return render(request, 'users/user_detail.html', context)
 
 
+@login_required
 def profile(request):
-    if request.user.is_authenticated:
-        user = request.user
+    user = request.user
 
-        form = ProfileForm(request.POST or {
-            'last_name': user.last_name,
-            'first_name': user.first_name,
-            'birthday': str(user.birthday),
-        } or None)
+    form = ProfileForm(request.POST or {
+        'last_name': user.last_name,
+        'first_name': user.first_name,
+        'birthday': str(user.birthday),
+    } or None)
 
-        context = {
-            'form': form,
-        }
+    context = {
+        'form': form,
+    }
 
-        if request.method == 'POST' and form.is_valid():
+    if request.method == 'POST' and form.is_valid():
 
-            user.first_name = form.cleaned_data['first_name']
-            user.last_name = form.cleaned_data['last_name']
-            user.birthday = form.cleaned_data['birthday']
+        user.first_name = form.cleaned_data['first_name']
+        user.last_name = form.cleaned_data['last_name']
+        user.birthday = form.cleaned_data['birthday']
 
-            user.save()
+        user.save()
 
-            return redirect('users:profile')
+        return redirect('users:profile')
 
-        return render(request, 'users/profile.html', context)
-
-    return redirect('homepage:home')
+    return render(request, 'users/profile.html', context)
