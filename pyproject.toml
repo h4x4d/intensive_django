@@ -14,16 +14,19 @@ sorl-thumbnail = "^12.9.0"
 django-cleanup = "^6.0.0"
 pillow = "^9.3.0"
 django-debug-toolbar = "^3.7.0"
+django-crispy-forms = "^1.14.0"
+crispy-bootstrap5 = "^0.7"
 
 [tool.poetry.group.dev]
 optional = true
 
 [tool.poetry.group.dev.dependencies]
-flake8 = "^5.0.4"
+flake8 = "5.*"
 dlint = "^0.13.0"
 isort = "^5.10.1"
 absolufy-imports = "^0.3.1"
 flake8-quotes = "^3.3.1"
+flake8-tidy-imports = "^4.8.0"
 
 [build-system]
 requires = ["poetry-core"]

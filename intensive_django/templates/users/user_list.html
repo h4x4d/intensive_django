@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Список пользователей{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                {% for user in users %}
+                    <a href="{% url 'users:user_detail' pk=user.id %}"><h3>{{ user.id }} - {{ user.email }}</h3></a>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

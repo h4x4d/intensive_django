@@ -20,6 +20,36 @@
                    class="nav-link {% if '/catalog/' in request.path %} fw-bold {% endif %} link-dark"
                    href="{% url 'catalog:item_list' %}">Каталог</a>
             </li>
+            <li><a type="button"
+                   class="nav-link {% ifequal request.path '/feedback/' %} fw-bold {% endifequal %} link-dark"
+                   href="{% url 'feedback:feedback' %}">Обратная связь</a>
+            </li>
+            <li><a type="button"
+                   class="nav-link {% ifequal request.path '/users/user_list/' %} fw-bold {% endifequal %} link-dark"
+                   href="{% url 'users:user_list' %}">Список пользователей</a>
+            </li>
+
+            {% if user.is_authenticated %}
+                <li><a type="button"
+                       class="nav-link {% ifequal request.path '/users/profile/' %} fw-bold {% endifequal %} link-dark"
+                       href="{% url 'users:profile' %}">Профиль</a>
+                </li>
+                <li><a type="button"
+                       class="nav-link {% ifequal request.path '/users/logout/' %} fw-bold {% endifequal %} link-dark"
+                       href="{% url 'users:logout' %}">Выход</a>
+                </li>
+            {% else %}
+
+                <li><a type="button"
+                       class="nav-link {% ifequal request.path '/users/login/' %} fw-bold {% endifequal %} link-dark"
+                       href="{% url 'users:login' %}">Вход</a>
+                </li>
+                <li><a type="button"
+                       class="nav-link {% ifequal request.path '/users/signup/' %} fw-bold {% endifequal %} link-dark"
+                       href="{% url 'users:signup' %}">Регистрация</a>
+                </li>
+            {% endif %}
+
         </ul>
     </header>
 </div>

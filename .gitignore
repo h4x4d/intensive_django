@@ -12,6 +12,8 @@ virtualvenv/
 
 generate_requirements.py
 sort_imports.py
+change_quotes.py
 
 old_migrations/
 /intensive_django/media/
+sent_emails/

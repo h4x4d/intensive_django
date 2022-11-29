@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Профиль{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="text-center fw-bolder">Профиль</h1>
+            </div>
+
+            {% include 'includes/form.html' with form_method='post' button_name='Изменить' %}
+
+        </div>
+            <a href="{% url 'users:password_change' %}" class="btn btn-outline-secondary " type="button">Смена пароля</a>
+    </div>
+{% endblock %}

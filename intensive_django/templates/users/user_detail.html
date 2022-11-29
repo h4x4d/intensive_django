@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Вы сменили пароль!{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+
+                <h3>{{ user.email }}</h3>
+                <h4>{{ user.first_name }}
+                    {{ user.last_name }}</h4>
+                <h4>{{ user.birthday }}</h4>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

@@ -136,7 +136,7 @@
       "category": 3,
       "text": "**Превосходно**",
       "text_rendered": "<p><strong>Превосходно</strong></p>",
-      "is_on_main": false,
+      "is_on_main": true,
       "tags": [
         5
       ]
@@ -147,13 +147,13 @@
     "pk": 8,
     "fields": {
       "is_published": true,
-      "name": "Коттедж",
-      "category": 3,
-      "text": "**Превосходно**",
-      "text_rendered": "<p><strong>Превосходно</strong></p>",
-      "is_on_main": false,
+      "name": "Апельсин",
+      "category": 2,
+      "text": "Роскошно",
+      "text_rendered": "<p>Роскошно</p>",
+      "is_on_main": true,
       "tags": [
-        5
+        3
       ]
     }
   }
