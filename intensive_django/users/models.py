@@ -3,6 +3,8 @@ from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager,
 from django.db import models
 from django.utils import timezone
 
+from users.validators import validate_birthday
+
 
 class AccountManager(BaseUserManager):
     use_in_migrations = True
@@ -38,7 +40,8 @@ class AccountManager(BaseUserManager):
 class Account(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
     birthday = models.DateField(blank=True, null=True,
-                                verbose_name='День рождения')
+                                verbose_name='День рождения',
+                                validators=[validate_birthday])
 
     first_name = models.CharField(max_length=50, blank=True, null=True,
                                   verbose_name='Имя')

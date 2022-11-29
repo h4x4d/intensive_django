@@ -1,5 +1,4 @@
 from django import forms
-from django.db.models.functions import datetime
 
 from users.models import Account
 
@@ -36,6 +35,5 @@ class ProfileForm(forms.ModelForm):
 
         widgets = {
             Account.birthday.field.name: forms.DateTimeInput(
-                attrs={'type': 'date', 'min': '1900-01-01',
-                       'max': datetime.datetime.today().date()}),
+                attrs={'type': 'date'}),
         }
