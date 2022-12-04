@@ -31,7 +31,7 @@
             {% if user.is_authenticated %}
       <div class="dropdown">
         <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          {% if user.first_name %}{{user.first_name}} {% endif %}{{user.email}}
+          {% if context_user.first_name %}{{context_user.first_name}} {% endif %}{{context_user.email}}
         </a>
         <ul class="dropdown-menu">
           <li><a class="dropdown-item" href="{% url 'users:profile' %}">Профиль</a></li>
