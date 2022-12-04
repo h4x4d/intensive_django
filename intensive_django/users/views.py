@@ -1,63 +1,53 @@
 from django.contrib.auth import login
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404, redirect, render
-
+from django.views.generic import FormView, ListView, DetailView
 from users.forms import ProfileForm, SignUpForm
 from users.models import Account
+from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-def sign_up(request):
-    form = SignUpForm(request.POST or None)
-    context = {
-        'form': form,
-    }
+class SignUpFormView(FormView):
+    template_name = 'users/signup.html'
+    success_url = reverse_lazy('homepage:home')
+    form_class = SignUpForm
 
-    if request.method == 'POST' and form.is_valid():
+    def form_valid(self, form):
         user = Account.objects.create_user(**form.cleaned_data)
-
-        login(request, user)
-
-        return redirect('homepage:home')
-
-    return render(request, 'users/signup.html', context)
+        login(self.request, user)
+        return super().form_valid(form)
 
 
-def user_list(request):
-    context = {
-        'users': Account.objects.values('id', 'email'),
-    }
-    return render(request, 'users/user_list.html', context)
+class UserListView(ListView):
+    template_name = 'users/user_list.html'
+    model = Account
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['users'] = Account.objects.all().filter(
+            is_active=True
+            ).values('id', 'email', 'first_name')
+        return context
 
 
-def user_detail(request, pk):
-    context = {
-        'user': get_object_or_404(Account, pk=pk),
-    }
-    return render(request, 'users/user_detail.html', context)
+class UserDetailView(DetailView):
+    model = Account
+    template_name = 'users/user_detail.html'
 
 
-@login_required
-def profile(request):
-    user = request.user
+class ProfileView(LoginRequiredMixin, FormView):
+    template_name = 'users/profile.html'
+    success_url = reverse_lazy('users:profile')
+    form_class = ProfileForm
 
-    form = ProfileForm(request.POST or {
-        'last_name': user.last_name,
-        'first_name': user.first_name,
-        'birthday': str(user.birthday),
-    } or None)
-
-    context = {
-        'form': form,
-    }
-
-    if request.method == 'POST' and form.is_valid():
-
+    def form_valid(self, form):
+        user = self.request.user
         user.first_name = form.cleaned_data['first_name']
         user.last_name = form.cleaned_data['last_name']
         user.birthday = form.cleaned_data['birthday']
-
         user.save()
+        return super().form_valid(form)
 
-        return redirect('users:profile')
-
-    return render(request, 'users/profile.html', context)
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update({'instance': self.request.user})
+        return kwargs

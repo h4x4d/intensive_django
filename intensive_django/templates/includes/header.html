@@ -31,7 +31,7 @@
             {% if user.is_authenticated %}
       <div class="dropdown">
         <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          {{user.first_name}} {{user.email}}
+          {% if user.first_name %}{{user.first_name}} {% endif %}{{user.email}}
         </a>
         <ul class="dropdown-menu">
           <li><a class="dropdown-item" href="{% url 'users:profile' %}">Профиль</a></li>
@@ -51,27 +51,6 @@
       </div>
     </ul>
     {% endif %}
-            {% comment %} {% if user.is_authenticated %}
-                <li><a type="button"
-                       class="nav-link {% ifequal request.path '/users/profile/' %} fw-bold {% endifequal %} link-dark"
-                       href="{% url 'users:profile' %}">Профиль</a>
-                </li>
-                <li><a type="button"
-                       class="nav-link {% ifequal request.path '/users/logout/' %} fw-bold {% endifequal %} link-dark"
-                       href="{% url 'users:logout' %}">Выход</a>
-                </li>
-            {% else %}
-
-                <li><a type="button"
-                       class="nav-link {% ifequal request.path '/users/login/' %} fw-bold {% endifequal %} link-dark"
-                       href="{% url 'users:login' %}">Вход</a>
-                </li>
-                <li><a type="button"
-                       class="nav-link {% ifequal request.path '/users/signup/' %} fw-bold {% endifequal %} link-dark"
-                       href="{% url 'users:signup' %}">Регистрация</a>
-                </li>
-            {% endif %} {% endcomment %}
-
         </ul>
     </header>
 </div>
