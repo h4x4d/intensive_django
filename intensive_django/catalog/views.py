@@ -17,20 +17,35 @@ def item_list(request):
 
 def item_detail(request, pk):
     item = get_object_or_404(Item, pk=pk)
+
+    # <----------- pulling item rating from user ------------->
     rating = 0
     try:
-        rating = Rating.objects.get(account_id=request.user.id,
-                                    item_id=item.id).rating
+        rating = Rating.objects.get_rating_from_user().rating
     except Exception:
         pass
 
-    rating_count = Rating.objects.filter(item_id=item.id).count()
-    avg_rating = sum(r.rating for r in Rating.objects.filter(
-        item_id=item.id)) / rating_count
-
+    # <--------- creating form --------->
     form = SetRatingForm(request.POST or None, initial={
         'rating': rating
     })
+
+    if request.method == 'POST' and form.is_valid():
+        form.save(request.user, item)
+
+        redirect('catalog:item_detail', pk=item.id)
+
+    item_ratings = Rating.objects.filter_by_item(item.id)
+
+    rating_count = item_ratings.count()
+
+    # <----------- calculating average rating for the item -------------->
+    avg_rating = 0.0
+    try:
+        avg_rating = sum(r.rating for r in item_ratings) / rating_count
+    except Exception:
+        pass
+
     context = {
         'item': item,
         'form': form,
@@ -39,10 +54,5 @@ def item_detail(request, pk):
         'rating_count': rating_count,
         'avg_rating': avg_rating
     }
-
-    if request.method == 'POST' and form.is_valid():
-        form.save(request.user, item)
-
-        redirect('catalog:item_detail', pk=item.id)
 
     return render(request, 'catalog/item.html', context)
