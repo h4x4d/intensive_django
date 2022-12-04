@@ -16,15 +16,12 @@ class SetRatingForm(forms.Form):
                                )
 
     def save(self, user, item):
-        print(self.cleaned_data['rating'])
         if Rating.objects.filter(account_id=user.id,
                                  item_id=item.id).count() > 0:
             if self.cleaned_data['rating'] == '0':
-                print('delete')
                 Rating.objects.filter(account_id=user.id,
                                       item_id=item.id).delete()
             else:
-                print('update')
                 (Rating.objects.filter(account_id=user.id, item_id=item.id).
                  update(
                     rating=self.cleaned_data['rating']))
