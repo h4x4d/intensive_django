@@ -1,8 +1,11 @@
-from django.shortcuts import render
+from django.views.generic import TemplateView
 
 
-def handler_404(request, exception):
-    response = render(request, 'errors/404.html')
-    response.status_code = 404
+class NotFoundView(TemplateView):
+    template_name = 'errors/404.html'
 
-    return response
+    def get(self, request, *args, **kwargs):
+        response = super(NotFoundView, self).get(request, *args, **kwargs)
+        response.status_code = 404
+
+        return response
