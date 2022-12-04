@@ -3,15 +3,14 @@ from rating.models import Rating
 
 
 class SetRatingForm(forms.Form):
-    widget = forms.Select(attrs={'class': 'dropdown'})
+    options = ((0, 'Нет оценки'),
+               (1, 'Ненавижу'),
+               (2, 'Не нравится'),
+               (3, 'Нормально'),
+               (4, 'Нравится'),
+               (5, 'Люблю'))
 
-    rating = forms.ChoiceField(choices=((0, 'Нет оценки'),
-                                        (1, 'Ненавижу'),
-                                        (2, 'Не нравится'),
-                                        (3, 'Нормально'),
-                                        (4, 'Нравится'),
-                                        (5, 'Люблю')
-                                        ),
+    rating = forms.ChoiceField(choices=options,
                                label='Ваша оценка:',
                                required=False,
                                )
