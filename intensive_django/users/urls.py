@@ -7,7 +7,8 @@ from django.contrib.auth.views import (LoginView, LogoutView,
                                        PasswordResetView)
 from django.urls import path, reverse_lazy
 
-from users.views import ProfileView, SignUpFormView, UserDetailView, UserListView
+from users.views import (ProfileView, SignUpFormView, UserDetailView,
+                         UserListView)
 
 app_name = 'users'
 

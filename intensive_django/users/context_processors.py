@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404
 
-from .models import Account
+from users.models import Account
 
 
 def access_account(request):
