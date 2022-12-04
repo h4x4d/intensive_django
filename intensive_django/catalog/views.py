@@ -1,17 +1,20 @@
+from catalog.models import Item
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, render
+from django.views.generic import DetailView, ListView
 
-from catalog.models import Item
+
+class ItemListView(ListView):
+    paginate_by = 5
+    model = Item
+    queryset = Item.objects.category_sorted()
+
+    template_name = 'catalog/index.html'
 
 
-def item_list(request):
-    items = Item.objects.category_sorted()
-
-    paginator = Paginator(items, 5)
-    page_number = request.GET.get('page', 1)
-
-    page_obj = paginator.get_page(page_number)
-    return render(request, 'catalog/index.html', {'page_obj': page_obj})
+class ItemDetailView(DetailView):
+    model = Item
+    template_name = 'catalog/item.html'
 
 
 def item_detail(request, pk):

@@ -1,14 +1,10 @@
-from django.core.paginator import Paginator
-from django.shortcuts import render
-
 from catalog.models import Item
+from django.views.generic import ListView
 
 
-def home(request):
-    items = Item.objects.on_main()
+class HomepageView(ListView):
+    paginate_by = 5
+    model = Item
+    queryset = Item.objects.on_main()
 
-    paginator = Paginator(items, 5)
-    page_number = request.GET.get('page', 1)
-
-    page_obj = paginator.get_page(page_number)
-    return render(request, 'homepage/index.html', {'page_obj': page_obj})
+    template_name = 'homepage/index.html'
