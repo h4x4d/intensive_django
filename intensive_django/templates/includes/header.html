@@ -28,8 +28,30 @@
                    class="nav-link {% ifequal request.path '/users/user_list/' %} fw-bold {% endifequal %} link-dark"
                    href="{% url 'users:user_list' %}">Список пользователей</a>
             </li>
-
             {% if user.is_authenticated %}
+      <div class="dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          {{user.first_name}} {{user.email}}
+        </a>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="{% url 'users:profile' %}">Профиль</a></li>
+          <li><a class="dropdown-item" href="{% url 'users:logout' %}">Выйти</a></li>
+        </ul>
+      </div>
+    </ul>
+      {% else %}
+      <div class="dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Авторизация
+        </a>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="{% url 'users:login' %}">Вход</a></li>
+          <li><a class="dropdown-item" href="{% url 'users:signup' %}">Регистрация</a></li>
+        </ul>
+      </div>
+    </ul>
+    {% endif %}
+            {% comment %} {% if user.is_authenticated %}
                 <li><a type="button"
                        class="nav-link {% ifequal request.path '/users/profile/' %} fw-bold {% endifequal %} link-dark"
                        href="{% url 'users:profile' %}">Профиль</a>
@@ -48,7 +70,7 @@
                        class="nav-link {% ifequal request.path '/users/signup/' %} fw-bold {% endifequal %} link-dark"
                        href="{% url 'users:signup' %}">Регистрация</a>
                 </li>
-            {% endif %}
+            {% endif %} {% endcomment %}
 
         </ul>
     </header>
