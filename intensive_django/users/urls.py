@@ -6,6 +6,7 @@ from django.contrib.auth.views import (LoginView, LogoutView,
                                        PasswordResetDoneView,
                                        PasswordResetView)
 from django.urls import path, reverse_lazy
+
 from users.views import profile, sign_up, user_detail, user_list
 
 app_name = 'users'

@@ -1,7 +1,7 @@
-from catalog.models import Item
-from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, render
 from django.views.generic import DetailView, ListView
+
+from catalog.models import Item
 
 
 class ItemListView(ListView):
