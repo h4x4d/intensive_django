@@ -1,3 +1,5 @@
+from django.db.models import Avg
+
 from catalog.models import Item
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import DetailView, FormView, ListView
@@ -36,10 +38,7 @@ class ItemDetailView(DetailView, FormView):
 
         rating_count = item_ratings.count()
 
-        if rating_count > 0:
-            avg_rating = sum(r.rating for r in item_ratings) / rating_count
-        else:
-            avg_rating = 0.0
+        avg_rating = item_ratings.aggregate(Avg('rating'))['rating__avg']
 
         context = {
             'item': item,
