@@ -1,6 +1,7 @@
 from catalog.models import Item
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
+from django.views.generic import DetailView, FormView, ListView
 from rating.forms import SetRatingForm
 from rating.models import Rating
 
@@ -15,43 +16,60 @@ def item_list(request):
     return render(request, 'catalog/index.html', {'page_obj': page_obj})
 
 
-def item_detail(request, pk):
-    item = get_object_or_404(Item, pk=pk)
+class ItemListView(ListView):
+    paginate_by = 5
+    model = Item
+    queryset = Item.objects.category_sorted()
 
-    # <----------- pulling item rating from user ------------->
-    rating = 0
-    try:    # try to get existing rating
-        rating = Rating.objects.get_rating_from_user(
-            item.id, request.user.id).rating
-    except Rating.DoesNotExist:  # ignore if no rating
-        pass
+    template_name = 'catalog/index.html'
 
-    # <--------- creating form --------->
-    form = SetRatingForm(request.POST or None, initial={
-        'rating': rating
-    })
 
-    if request.method == 'POST' and form.is_valid():
-        form.save(request.user, item)
+class ItemDetailView(DetailView, FormView):
+    model = Item
+    template_name = 'catalog/item.html'
+    form_class = SetRatingForm
 
-        redirect('catalog:item_detail', pk=item.id)
+    def get(self, request, pk):
+        self.item = get_object_or_404(Item, pk=self.kwargs['pk'])
+        self.user = request.user
 
-    item_ratings = Rating.objects.filter_by_item(item.id)
+        # <----------- pulling item rating from user ------------->
+        rating = 0
+        try:    # try to get existing rating
+            rating = Rating.objects.get_rating_from_user(
+                self.item.id, request.user.id).rating
+        except Rating.DoesNotExist:  # ignore if no rating
+            pass
 
-    rating_count = item_ratings.count()
+        # <--------- creating form --------->
+        self.form = SetRatingForm(request.POST or None, initial={
+            'rating': rating
+        })
 
-    # <----------- calculating average rating for the item -------------->
-    avg_rating = 0.0
-    try:    # try to calculate average
-        avg_rating = sum(r.rating for r in item_ratings) / rating_count
-    except ZeroDivisionError:   # ingore if no ratings (rating_count == 0)
-        pass
+        item_ratings = Rating.objects.filter_by_item(self.item.id)
 
-    context = {
-        'item': item,
-        'form': form,
-        'rating_count': rating_count,
-        'avg_rating': avg_rating
-    }
+        rating_count = item_ratings.count()
 
-    return render(request, 'catalog/item.html', context)
+        # <----------- calculating average rating for the item -------------->
+        avg_rating = 0.0
+        try:    # try to calculate average
+            avg_rating = sum(r.rating for r in item_ratings) / rating_count
+        except ZeroDivisionError:   # ingore if no ratings (rating_count == 0)
+            pass
+
+        context = {
+            'item': self.item,
+            'form': self.form,
+            'rating_count': rating_count,
+            'avg_rating': avg_rating
+        }
+
+        return render(request, self.template_name, context)
+
+    def form_valid(self, form):
+        if form.is_valid():
+            pk = self.kwargs['pk']
+            item = get_object_or_404(Item, pk=pk)
+            form.save(self.request.user, item)
+
+            return redirect('catalog:item_detail', pk=pk)
