@@ -26,7 +26,7 @@
                 <h5>{{ item.text_rendered | safe }}</h5>
 
                 {% if user.is_authenticated %}
-                    {% include 'includes/form.html' %}
+                    {% include 'includes/form.html' with form_method='POST' button_name='Поставить' %}
                 {% endif %}
             </div>
         </div>

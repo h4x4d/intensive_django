@@ -16,6 +16,7 @@ class SetRatingForm(forms.Form):
                                )
 
     def save(self, user, item):
+        cleaned_rating = self.cleaned_data['rating']
         if Rating.objects.filter(account_id=user.id,
                                  item_id=item.id).count() > 0:
             if self.cleaned_data['rating'] == '0':
@@ -24,8 +25,8 @@ class SetRatingForm(forms.Form):
             else:
                 (Rating.objects.filter(account_id=user.id, item_id=item.id).
                  update(
-                    rating=self.cleaned_data['rating']))
+                    rating=cleaned_rating))
         else:
             Rating.objects.create(
                 account_id=user.id, item_id=item.id,
-                rating=self.cleaned_data['rating'])
+                rating=cleaned_rating)

@@ -20,9 +20,10 @@ def item_detail(request, pk):
 
     # <----------- pulling item rating from user ------------->
     rating = 0
-    try:
-        rating = Rating.objects.get_rating_from_user().rating
-    except Exception:
+    try:    # try to get existing rating
+        rating = Rating.objects.get_rating_from_user(
+            item.id, request.user.id).rating
+    except Rating.DoesNotExist:  # ignore if no rating
         pass
 
     # <--------- creating form --------->
@@ -41,16 +42,14 @@ def item_detail(request, pk):
 
     # <----------- calculating average rating for the item -------------->
     avg_rating = 0.0
-    try:
+    try:    # try to calculate average
         avg_rating = sum(r.rating for r in item_ratings) / rating_count
-    except Exception:
+    except ZeroDivisionError:   # ingore if no ratings (rating_count == 0)
         pass
 
     context = {
         'item': item,
         'form': form,
-        'button_name': 'Поставить',
-        'form_method': 'POST',
         'rating_count': rating_count,
         'avg_rating': avg_rating
     }
