@@ -6,16 +6,6 @@ from rating.forms import SetRatingForm
 from rating.models import Rating
 
 
-def item_list(request):
-    items = Item.objects.category_sorted()
-
-    paginator = Paginator(items, 5)
-    page_number = request.GET.get('page', 1)
-
-    page_obj = paginator.get_page(page_number)
-    return render(request, 'catalog/index.html', {'page_obj': page_obj})
-
-
 class ItemListView(ListView):
     paginate_by = 5
     model = Item
