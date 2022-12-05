@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'homepage.apps.HomepageConfig',
     'feedback.apps.FeedbackConfig',
     'users.apps.UsersConfig',
+    'rating.apps.RatingConfig',
     'markdownfield',
     'sorl.thumbnail',
     'crispy_forms',
@@ -65,7 +66,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
@@ -102,19 +102,19 @@ DATABASES = {
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.'
-                'UserAttributeSimilarityValidator',
+        'UserAttributeSimilarityValidator',
     },
     {
         'NAME': 'django.contrib.auth.password_validation.'
-                'MinimumLengthValidator',
+        'MinimumLengthValidator',
     },
     {
         'NAME': 'django.contrib.auth.password_validation.'
-                'CommonPasswordValidator',
+        'CommonPasswordValidator',
     },
     {
         'NAME': 'django.contrib.auth.password_validation.'
-                'NumericPasswordValidator',
+        'NumericPasswordValidator',
     },
 ]
 
@@ -130,6 +130,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static-dev',
 ]
+STATIC_ROOT = BASE_DIR / 'static/'
 
 SITE_URL = 'http://127.0.0.1:8000'
 
