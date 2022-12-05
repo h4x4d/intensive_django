@@ -22,11 +22,10 @@ class ItemDetailView(DetailView, FormView):
         pk = kwargs['pk']
         item = get_object_or_404(Item, pk=pk)
 
-        rating_object = Rating.objects.get_rating_from_user(
-            item.id, request.user.id)
-        if rating_object is not None:
-            rating = rating_object.rating
-        else:
+        try:
+            rating = Rating.objects.get_rating_from_user(
+                item.id, request.user.id).rating
+        except Rating.DoesNotExist:
             rating = 0
 
         form = SetRatingForm(request.POST or None, initial={
@@ -48,7 +47,6 @@ class ItemDetailView(DetailView, FormView):
             'rating_count': rating_count,
             'avg_rating': avg_rating,
         }
-
 
         return render(request, self.template_name, context)
 
