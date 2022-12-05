@@ -1,6 +1,5 @@
-from django.views.generic import ListView
-
 from catalog.models import Item
+from django.views.generic import ListView
 
 
 class HomepageView(ListView):

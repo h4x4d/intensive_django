@@ -1,9 +1,9 @@
 from django.contrib.auth import login
-from django.views.generic import FormView, ListView, DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
+from django.views.generic import DetailView, FormView, ListView
 from users.forms import ProfileForm, SignUpForm
 from users.models import Account
-from django.urls import reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class SignUpFormView(FormView):

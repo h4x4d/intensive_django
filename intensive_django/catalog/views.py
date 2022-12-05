@@ -1,6 +1,5 @@
-from django.db.models import Avg
-
 from catalog.models import Item
+from django.db.models import Avg
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import DetailView, FormView, ListView
 from rating.forms import SetRatingForm
