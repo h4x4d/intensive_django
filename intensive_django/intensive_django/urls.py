@@ -3,16 +3,18 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 
+import Core.views
+
 urlpatterns = [
     path('', include('homepage.urls')),
     path('catalog/', include('catalog.urls')),
     path('about/', include('about.urls')),
     path('feedback/', include('feedback.urls')),
-    path('users/', include('users.urls'),),
+    path('users/', include('users.urls')),
     path('admin/', admin.site.urls),
 ]
 
-handler404 = 'Core.views.handler_404'
+handler404 = Core.views.NotFoundView.as_view()
 
 
 if settings.DEBUG:

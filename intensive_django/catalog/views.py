@@ -49,6 +49,7 @@ class ItemDetailView(DetailView, FormView):
             'avg_rating': avg_rating,
         }
 
+
         return render(request, self.template_name, context)
 
     def form_valid(self, form):
