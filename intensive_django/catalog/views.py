@@ -18,39 +18,35 @@ class ItemDetailView(DetailView, FormView):
     template_name = 'catalog/item.html'
     form_class = SetRatingForm
 
-    def get(self, request, pk):
-        self.item = get_object_or_404(Item, pk=self.kwargs['pk'])
-        self.user = request.user
+    def get(self, request, **kwargs):
+        pk = kwargs['pk']
+        item = get_object_or_404(Item, pk=pk)
 
-        # <----------- pulling item rating from user ------------->
-        rating = 0
-        try:    # try to get existing rating
-            rating = Rating.objects.get_rating_from_user(
-                self.item.id, request.user.id).rating
-        except Rating.DoesNotExist:  # ignore if no rating
-            pass
+        rating_object = Rating.objects.get_rating_from_user(
+            item.id, request.user.id)
+        if rating_object is not None:
+            rating = rating_object.rating
+        else:
+            rating = 0
 
-        # <--------- creating form --------->
-        self.form = SetRatingForm(request.POST or None, initial={
-            'rating': rating
+        form = SetRatingForm(request.POST or None, initial={
+            'rating': rating,
         })
 
-        item_ratings = Rating.objects.filter_by_item(self.item.id)
+        item_ratings = Rating.objects.filter_by_item(item.id)
 
         rating_count = item_ratings.count()
 
-        # <----------- calculating average rating for the item -------------->
-        avg_rating = 0.0
-        try:    # try to calculate average
+        if rating_count > 0:
             avg_rating = sum(r.rating for r in item_ratings) / rating_count
-        except ZeroDivisionError:   # ingore if no ratings (rating_count == 0)
-            pass
+        else:
+            avg_rating = 0.0
 
         context = {
-            'item': self.item,
-            'form': self.form,
+            'item': item,
+            'form': form,
             'rating_count': rating_count,
-            'avg_rating': avg_rating
+            'avg_rating': avg_rating,
         }
 
         return render(request, self.template_name, context)
