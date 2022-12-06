@@ -1,9 +1,9 @@
 from django.core.mail import send_mail
 from django.urls import reverse_lazy
 from django.views.generic import FormView
-
 from feedback.forms import FeedBackForm
 from feedback.models import FeedBack
+
 from intensive_django.settings import FROM_MAIL, TO_MAIL
 
 

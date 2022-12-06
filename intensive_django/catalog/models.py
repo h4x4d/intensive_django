@@ -1,11 +1,10 @@
+from catalog.validators import ValidateMustBeParam
+from Core.models import (ImageBaseModel, NamedBaseModel, PublishedBaseModel,
+                         SlugBaseModel)
 from django.db import models
 from django.db.models import Prefetch
 from markdownfield.models import MarkdownField, RenderedMarkdownField
 from markdownfield.validators import VALIDATOR_NULL
-
-from catalog.validators import ValidateMustBeParam
-from Core.models import (ImageBaseModel, NamedBaseModel, PublishedBaseModel,
-                         SlugBaseModel)
 
 
 class ItemManager(models.Manager):

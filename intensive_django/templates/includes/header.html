@@ -1,5 +1,15 @@
 {% load static %}
-
+{% if birthday_users != None %}
+<div class="alert alert-primary" role="alert">
+  Сегодня день рождения у:
+  {% for birthday_user in birthday_users %}
+  <a href="{% url 'users:user_detail' pk=birthday_user.id %}">{% if birthday_user.first_name %} {{birthday_user.first_name}} - {% endif %}{{birthday_user.email}}</a>
+    {%if not forloop.last%}
+    , 
+    {% endif %}
+  {% endfor %}
+</div>
+{% endif %}
 <div class="container">
     <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
         <a href="/"
