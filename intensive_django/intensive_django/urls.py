@@ -1,3 +1,4 @@
+import Core.views
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
@@ -8,11 +9,11 @@ urlpatterns = [
     path('catalog/', include('catalog.urls')),
     path('about/', include('about.urls')),
     path('feedback/', include('feedback.urls')),
-    path('users/', include('users.urls'),),
+    path('users/', include('users.urls')),
     path('admin/', admin.site.urls),
 ]
 
-handler404 = 'Core.views.handler_404'
+handler404 = Core.views.NotFoundView.as_view()
 
 
 if settings.DEBUG:

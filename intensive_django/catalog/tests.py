@@ -1,7 +1,6 @@
+from catalog.models import Category, Item, Tag
 from django.core.exceptions import ValidationError
 from django.test import Client, TestCase
-
-from catalog.models import Category, Item, Tag
 
 
 class CatalogURLTests(TestCase):
@@ -47,8 +46,7 @@ class ModelsTest(TestCase):
         with self.assertRaises(ValidationError):
             self.item = Item(name='Test_item',
                              category=self.category,
-                             text='Random text',
-                             )
+                             text='Random text')
 
             self.item.full_clean()
             self.item.save()
