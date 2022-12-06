@@ -22,11 +22,12 @@ class SetRatingForm(forms.Form):
             if self.cleaned_data['rating'] == '0':
                 Rating.objects.filter(account_id=user.id,
                                       item_id=item.id).delete()
-            else:
-                (Rating.objects.filter(account_id=user.id, item_id=item.id).
-                 update(
-                    rating=cleaned_rating))
-        else:
-            Rating.objects.create(
-                account_id=user.id, item_id=item.id,
-                rating=cleaned_rating)
+                return
+
+            (Rating.objects.filter(account_id=user.id, item_id=item.id).
+             update(rating=cleaned_rating))
+            return
+
+        Rating.objects.create(
+            account_id=user.id, item_id=item.id,
+            rating=cleaned_rating)

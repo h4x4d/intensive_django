@@ -24,7 +24,8 @@ class ItemDetailView(DetailView, FormView):
 
         try:
             rating = Rating.objects.get_rating_from_user(
-                item.id, request.user.id).rating
+                item.id, request.user.id,
+            ).rating
         except Rating.DoesNotExist:
             rating = 0
 
